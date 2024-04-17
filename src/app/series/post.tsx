@@ -5,7 +5,7 @@ export default function Post() {
     <>
       {posts.map((post) => (
         <div key={post.id}>
-          <h2>{post.title}</h2>
+          <h2>#{post.title}</h2>
           <p>{post.content}</p>
           <div>{post.publicDate}</div>
         </div>

@@ -18,7 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 20 }}>
+        <div
+          style={{
+            paddingLeft: 20,
+            paddingRight: 20,
+            paddingTop: 20,
+            maxWidth: 1200,
+            margin: "auto",
+          }}
+        >
           <Header></Header>
           {children}
         </div>

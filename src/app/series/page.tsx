@@ -1,12 +1,12 @@
-import Post from "./post";
+import AdvancePost from "./AdvancePost";
 
 export default function Series() {
   return (
     <div className="w">
       <h1>Series</h1>
-      <Post></Post>
-      <Post></Post>
-      <Post></Post>
+      <AdvancePost></AdvancePost>
+      <AdvancePost></AdvancePost>
+      <AdvancePost></AdvancePost>
     </div>
   );
 }

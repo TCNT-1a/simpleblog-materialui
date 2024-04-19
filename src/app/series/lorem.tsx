@@ -1,4 +1,4 @@
-export const lorem = [
+const lorem = [
   "Lorem",
   "ipsum",
   "dolor",
@@ -138,3 +138,37 @@ export const lorem = [
   "est",
   "laborum",
 ];
+
+function formatDate(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+export function formatDateyyyyMMMdd(date: Date) {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const year = date.getFullYear();
+  const month = months[date.getMonth()];
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+export function getLorem(num = 10) {
+  const randomWords = [];
+  for (let i = 0; i < num; i++) {
+    const randomIndex = Math.floor(Math.random() * (lorem.length - 1));
+    randomWords.push(lorem[randomIndex]);
+  }
+  const loremSentence = randomWords.join(" ");
+  return loremSentence;
+}

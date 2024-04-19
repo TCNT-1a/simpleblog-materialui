@@ -19,6 +19,32 @@ import React from "react";
 export default function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setMenuState(loginState());
+  };
+
+  const loginState = () =>
+    [
+      { id: 1, title: "Home", icon: <Person /> },
+      { id: 2, title: "Profile", icon: <AccountCircle /> },
+      { id: 3, title: "Logout", icon: <ExitToApp />, action: handleLogout },
+    ] as menuItem[];
+
+  const logoutState = () =>
+    [
+      { id: 1, title: "Home", icon: <Person /> },
+      { id: 2, title: "Login", icon: <LockOpen />, action: handleLogin },
+    ] as menuItem[];
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setMenuState(logoutState());
+  };
+  const [menuState, setMenuState] = React.useState(logoutState());
+
   return (
     <AppBar position="static" style={{ boxShadow: "none" }}>
       <Toolbar
@@ -27,13 +53,29 @@ export default function NavBar() {
           color: theme.palette.text.primary,
         }}
       >
-        {isMobile ? <HorizontalMenu /> : <VerticalMenu />}
+        {isMobile ? (
+          <HorizontalMenu
+            menuState={menuState}
+            onMenuStateChange={setMenuState}
+          />
+        ) : (
+          <VerticalMenu
+            menuState={menuState}
+            onMenuStateChange={setMenuState}
+          />
+        )}
       </Toolbar>
     </AppBar>
   );
 }
 
-function HorizontalMenu() {
+function HorizontalMenu({
+  menuState,
+  onMenuStateChange,
+}: {
+  menuState: menuItem[];
+  onMenuStateChange: React.Dispatch<React.SetStateAction<menuItem[]>>;
+}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -42,7 +84,6 @@ function HorizontalMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log("menuItems", menuItems);
   return (
     <>
       <IconButton
@@ -60,8 +101,14 @@ function HorizontalMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {menuItems.map((item) => (
-          <MenuItem key={item.id} onClick={handleClose}>
+        {menuState.map((item) => (
+          <MenuItem
+            key={item.id}
+            onClick={(event) => {
+              handleClose(event);
+              if (item.action) item.action();
+            }}
+          >
             {item.icon}
             {item.title}
           </MenuItem>
@@ -70,12 +117,18 @@ function HorizontalMenu() {
     </>
   );
 }
-function VerticalMenu() {
+function VerticalMenu({
+  menuState,
+  onMenuStateChange,
+}: {
+  menuState: menuItem[];
+  onMenuStateChange: React.Dispatch<React.SetStateAction<menuItem[]>>;
+}) {
   return (
     <>
       <div>
-        {menuItems.map((item) => (
-          <Button key={item.id} color="inherit">
+        {menuState.map((item) => (
+          <Button key={item.id} color="inherit" onClick={item.action}>
             {item.icon}
             {item.title}
           </Button>
@@ -84,9 +137,11 @@ function VerticalMenu() {
     </>
   );
 }
-const menuItems = [
-  { title: "Profile", href: "/profile", icon: <Person />, id: 1 },
-  { title: "My account", href: "/account", icon: <AccountCircle />, id: 2 },
-  { title: "Login", href: "/login", icon: <LockOpen />, id: 3 },
-  { title: "Logout", href: "/logout", icon: <ExitToApp />, id: 4 },
-];
+
+type menuItem = {
+  action: () => void;
+  title: string;
+  href: string;
+  icon: React.ReactNode;
+  id: number;
+};

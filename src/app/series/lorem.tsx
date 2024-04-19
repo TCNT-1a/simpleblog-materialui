@@ -38,7 +38,7 @@ const lorem = [
   "duis",
   "aute",
   "irure",
-  " dolor",
+  "dolor",
   "in",
   "reprehenderit",
   "in",

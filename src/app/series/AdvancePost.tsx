@@ -1,84 +1,70 @@
-"use client";
 import { Button, Card, Chip, Grid, Typography, useTheme } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Image from "next/image";
-
-import { getLorem, formatDateyyyyMMMdd } from "./lorem";
-import { useEffect, useState } from "react";
-export default function AdvancePost() {
+import { formatDateyyyyMMMdd, getLorem } from "./lorem";
+export function AdvancePost({ post }: { post: Post }) {
   const theme = useTheme();
-  const [posts, setPosts] = useState<Post[]>([]);
-  useEffect(() => {
-    const p = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((id) =>
-      createPost(id)
-    ) as Post[];
-    setPosts(p);
-  }, []);
   return (
-    <>
-      {posts.map((post) => (
-        <Card
-          key={post.id}
-          style={{
-            padding: 20,
-            margin: 10,
-          }}
-        >
-          <Grid
-            container
-            spacing={2}
+    <Card
+      key={post.id}
+      style={{
+        padding: 20,
+        margin: 10,
+      }}
+    >
+      <Grid
+        container
+        spacing={2}
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Grid item>
+          <ViewCount viewCount={post.viewCount}></ViewCount>
+        </Grid>
+        <Grid item style={{ flexGrow: 1 }}>
+          <Typography variant="body1" style={{ fontStyle: "italic" }}>
+            {post.publicDate}
+          </Typography>
+        </Grid>
+      </Grid>
+      <h2 style={{ color: theme.palette.info.light }}>#{post.title}</h2>
+
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Image
+            alt="post image"
+            width={300}
+            height={200}
+            src={`https://picsum.photos/300/200?random=${post.id}`}
+            style={{ width: "100%" }}
+          ></Image>
+        </Grid>
+        <Grid item xs={8} style={{}}>
+          <p
             style={{
-              display: "flex",
-              alignItems: "center",
+              fontSize: 14,
+              lineHeight: 1.6,
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 8,
+              overflow: "hidden",
             }}
           >
-            <Grid item>
-              <ViewCount viewCount={post.viewCount}></ViewCount>
-            </Grid>
-            <Grid item style={{ flexGrow: 1 }}>
-              <Typography variant="body1" style={{ fontStyle: "italic" }}>
-                {post.publicDate}
-              </Typography>
-            </Grid>
-          </Grid>
-          <h2 style={{ color: theme.palette.info.light }}>#{post.title}</h2>
-
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <Image
-                alt="post image"
-                width={300}
-                height={200}
-                src={`https://picsum.photos/300/200?random=${post.id}`}
-                style={{ width: "100%" }}
-              ></Image>
-            </Grid>
-            <Grid item xs={8} style={{}}>
-              <p
-                style={{
-                  fontSize: 14,
-                  lineHeight: 1.6,
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: 8,
-                  overflow: "hidden",
-                }}
-              >
-                {post.content}
-              </p>
-            </Grid>
-          </Grid>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Button variant="contained">Xem tiếp</Button>
-            </Grid>
-            <Grid item>
-              <ViewCategory tags={post.tags} />
-            </Grid>
-          </Grid>
-        </Card>
-      ))}
-    </>
+            {post.content}
+          </p>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item>
+          <Button variant="contained">Xem tiếp</Button>
+        </Grid>
+        <Grid item>
+          <ViewCategory tags={post.tags} />
+        </Grid>
+      </Grid>
+    </Card>
   );
 }
 
@@ -86,7 +72,6 @@ function ViewCount({ viewCount }: { viewCount: number }) {
   return (
     <Grid
       container
-      //   spacing={2}
       style={{
         display: "flex",
         alignItems: "center",
@@ -121,7 +106,7 @@ function ViewCategory({ tags }: { tags: string }) {
     </Grid>
   );
 }
-type Post = {
+export type Post = {
   id: number;
   title: string;
   content: string;
@@ -130,7 +115,7 @@ type Post = {
   publicDate: string;
 };
 
-function createPost(id: number) {
+export function createPost(id: number) {
   return {
     id: id,
     title: getLorem(10),

@@ -15,28 +15,35 @@ import ExitToApp from "@mui/icons-material/ExitToApp";
 import Person from "@mui/icons-material/Person";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export default function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const router = useRouter();
   const handleLogin = () => {
     setIsLoggedIn(true);
     setMenuState(loginState());
   };
-
+  const handleSeries = () => {
+    console.log("handleSerial");
+    router.push("/series");
+  };
   const loginState = () =>
     [
       { id: 1, title: "Home", icon: <Person /> },
-      { id: 2, title: "Profile", icon: <AccountCircle /> },
-      { id: 3, title: "Logout", icon: <ExitToApp />, action: handleLogout },
+      { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
+      { id: 3, title: "Profile", icon: <AccountCircle /> },
+      { id: 4, title: "Logout", icon: <ExitToApp />, action: handleLogout },
     ] as menuItem[];
 
   const logoutState = () =>
     [
       { id: 1, title: "Home", icon: <Person /> },
-      { id: 2, title: "Login", icon: <LockOpen />, action: handleLogin },
+      { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
+      { id: 3, title: "Login", icon: <LockOpen />, action: handleLogin },
     ] as menuItem[];
 
   const handleLogout = () => {
@@ -81,7 +88,7 @@ function HorizontalMenu({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     setAnchorEl(null);
   };
   return (

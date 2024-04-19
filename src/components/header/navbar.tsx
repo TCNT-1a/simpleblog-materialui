@@ -23,17 +23,20 @@ export default function NavBar() {
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const router = useRouter();
+
   const handleLogin = () => {
     setIsLoggedIn(true);
     setMenuState(loginState());
   };
   const handleSeries = () => {
-    console.log("handleSerial");
     router.push("/series");
+  };
+  const handleHome = () => {
+    router.push("/");
   };
   const loginState = () =>
     [
-      { id: 1, title: "Home", icon: <Person /> },
+      { id: 1, title: "Home", icon: <Person />, action: handleHome },
       { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
       { id: 3, title: "Profile", icon: <AccountCircle /> },
       { id: 4, title: "Logout", icon: <ExitToApp />, action: handleLogout },
@@ -41,7 +44,7 @@ export default function NavBar() {
 
   const logoutState = () =>
     [
-      { id: 1, title: "Home", icon: <Person /> },
+      { id: 1, title: "Home", icon: <Person />, action: handleHome },
       { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
       { id: 3, title: "Login", icon: <LockOpen />, action: handleLogin },
     ] as menuItem[];

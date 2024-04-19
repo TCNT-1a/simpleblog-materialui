@@ -1,7 +1,7 @@
 "use client";
 
-import ListPost from "../series/ListPost";
-import { layout_styles } from "../series/style";
+import ListPost from "./ListPost";
+import { layout_styles } from "./style";
 
 export default function PostPage({ params }: { params: { slug: string } }) {
   return (

@@ -1,7 +1,7 @@
 import { Button, Card, Chip, Grid, Typography, useTheme } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Image from "next/image";
-import { formatDateyyyyMMMdd, getLorem } from "./lorem";
+import { formatDateyyyyMMMdd, getLorem } from "../data/lorem";
 export function AdvancePost({ post }: { post: Post }) {
   const theme = useTheme();
   return (

@@ -5,7 +5,7 @@ import AdvancePosts from "./ListPost";
 export default function Series() {
   return (
     <div className="w">
-      <Typography variant="h2">Series</Typography>
+      <h2>Series</h2>
       <ListPost></ListPost>
     </div>
   );

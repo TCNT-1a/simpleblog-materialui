@@ -39,6 +39,7 @@ export default function NavBar() {
       { id: 1, title: "Home", icon: <Person />, action: handleHome },
       { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
       { id: 3, title: "Profile", icon: <AccountCircle /> },
+      { id: 4, title: "Admin", icon: <AccountCircle /> },
       { id: 4, title: "Logout", icon: <ExitToApp />, action: handleLogout },
     ] as menuItem[];
 
@@ -64,28 +65,16 @@ export default function NavBar() {
         }}
       >
         {isMobile ? (
-          <HorizontalMenu
-            menuState={menuState}
-            onMenuStateChange={setMenuState}
-          />
+          <HorizontalMenu menuState={menuState} />
         ) : (
-          <VerticalMenu
-            menuState={menuState}
-            onMenuStateChange={setMenuState}
-          />
+          <VerticalMenu menuState={menuState} />
         )}
       </Toolbar>
     </AppBar>
   );
 }
 
-function HorizontalMenu({
-  menuState,
-  onMenuStateChange,
-}: {
-  menuState: menuItem[];
-  onMenuStateChange: React.Dispatch<React.SetStateAction<menuItem[]>>;
-}) {
+function HorizontalMenu({ menuState }: { menuState: menuItem[] }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -127,13 +116,7 @@ function HorizontalMenu({
     </>
   );
 }
-function VerticalMenu({
-  menuState,
-  onMenuStateChange,
-}: {
-  menuState: menuItem[];
-  onMenuStateChange: React.Dispatch<React.SetStateAction<menuItem[]>>;
-}) {
+function VerticalMenu({ menuState }: { menuState: menuItem[] }) {
   return (
     <>
       <div>

@@ -2,16 +2,11 @@ import { Button, Card, Chip, Grid, Typography, useTheme } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Image from "next/image";
 import { formatDateyyyyMMMdd, getLorem } from "../data/lorem";
+import { layout_styles } from "./style";
 export function AdvancePost({ post }: { post: Post }) {
   const theme = useTheme();
   return (
-    <Card
-      key={post.id}
-      style={{
-        padding: 20,
-        margin: 10,
-      }}
-    >
+    <Card key={post.id} style={layout_styles}>
       <Grid
         container
         spacing={2}
@@ -29,7 +24,7 @@ export function AdvancePost({ post }: { post: Post }) {
           </Typography>
         </Grid>
       </Grid>
-      <h2 style={{ color: theme.palette.info.light }}>#{post.title}</h2>
+      <h3 style={{ color: theme.palette.info.light }}>#{post.title}</h3>
 
       <Grid container spacing={2}>
         <Grid item xs={4}>
@@ -118,7 +113,7 @@ export type Post = {
 export function createPost(id: number) {
   return {
     id: id,
-    title: getLorem(10),
+    title: getLorem(10).toUpperCase(),
     content: getLorem(100),
     viewCount: 100,
     tags: "category1, category2, category3",

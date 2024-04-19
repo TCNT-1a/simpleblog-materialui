@@ -1,11 +1,12 @@
-import { Typography } from "@mui/material";
 import ListPost from "./ListPost";
-import AdvancePosts from "./ListPost";
+import { layout_styles } from "./style";
 
 export default function Series() {
   return (
     <div className="w">
-      <h2>Series</h2>
+      <h2 style={layout_styles}>
+        Series hướng dẫn các dự án tiềm năng Airdrop
+      </h2>
       <ListPost></ListPost>
     </div>
   );

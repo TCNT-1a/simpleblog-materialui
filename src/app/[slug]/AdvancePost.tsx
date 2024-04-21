@@ -3,7 +3,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import Image from "next/image";
 import { formatDateyyyyMMMdd, getLorem } from "../data/lorem";
 import { layout_styles } from "./style";
-export function AdvancePost({ post }: { post: Post }) {
+import Link from "next/link";
+export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
   const theme = useTheme();
   return (
     <Card key={post.id} style={layout_styles}>
@@ -24,17 +25,28 @@ export function AdvancePost({ post }: { post: Post }) {
           </Typography>
         </Grid>
       </Grid>
-      <h3 style={{ color: theme.palette.info.light }}>#{post.title}</h3>
+      <Link
+        href={`/${slug}/${post.slug}`}
+        passHref
+        style={{ textDecoration: "none" }}
+      >
+        <h3 style={{ color: theme.palette.info.light }}>
+          <span style={{ color: theme.palette.primary.dark }}># </span>
+          {post.title}
+        </h3>
+      </Link>
 
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <Image
-            alt="post image"
-            width={300}
-            height={200}
-            src={`https://picsum.photos/300/200?random=${post.id}`}
-            style={{ width: "100%" }}
-          ></Image>
+          <Card>
+            <Image
+              alt="post image"
+              width={300}
+              height={200}
+              src={`https://picsum.photos/300/200?random=${post.id}`}
+              style={{ width: "100%" }}
+            ></Image>
+          </Card>
         </Grid>
         <Grid item xs={8} style={{}}>
           <p
@@ -82,7 +94,7 @@ function ViewCount({ viewCount }: { viewCount: number }) {
     </Grid>
   );
 }
-function ViewCategory({ tags }: { tags: string }) {
+export function ViewCategory({ tags }: { tags: string }) {
   return (
     <Grid
       container
@@ -108,6 +120,7 @@ export type Post = {
   viewCount: number;
   tags: string;
   publicDate: string;
+  slug: string;
 };
 
 export function createPost(id: number) {
@@ -118,5 +131,6 @@ export function createPost(id: number) {
     viewCount: 100,
     tags: "category1, category2, category3",
     publicDate: formatDateyyyyMMMdd(new Date()),
+    slug: "bai-viet-1",
   };
 }

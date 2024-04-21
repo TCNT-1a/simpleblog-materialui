@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/header";
+import { Grid } from "@mui/material";
+import LeftBar from "@/components/leftbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +30,14 @@ export default function RootLayout({
           }}
         >
           <Header></Header>
-          {children}
+          <Grid container>
+            <Grid item xs={3}>
+              <LeftBar />
+            </Grid>
+            <Grid item xs={9}>
+              {children}
+            </Grid>
+          </Grid>
         </div>
       </body>
     </html>

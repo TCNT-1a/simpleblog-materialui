@@ -16,7 +16,8 @@ import Person from "@mui/icons-material/Person";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
 import { useRouter } from "next/navigation";
-
+import AirplanemodeActive from "@mui/icons-material/AirplanemodeActive";
+import AdminPanelSettings from "@mui/icons-material/AdminPanelSettings";
 export default function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -38,16 +39,18 @@ export default function NavBar() {
     [
       { id: 1, title: "Home", icon: <Person />, action: handleHome },
       { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-      { id: 3, title: "Profile", icon: <AccountCircle /> },
-      { id: 4, title: "Admin", icon: <AccountCircle /> },
-      { id: 4, title: "Logout", icon: <ExitToApp />, action: handleLogout },
+      { id: 3, title: "Airdrop", icon: <AirplanemodeActive /> },
+      { id: 4, title: "Profile", icon: <AccountCircle /> },
+      { id: 5, title: "Admin", icon: <AdminPanelSettings /> },
+      { id: 6, title: "Logout", icon: <ExitToApp />, action: handleLogout },
     ] as menuItem[];
 
   const logoutState = () =>
     [
       { id: 1, title: "Home", icon: <Person />, action: handleHome },
       { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-      { id: 3, title: "Login", icon: <LockOpen />, action: handleLogin },
+      { id: 3, title: "Airdrop", icon: <AirplanemodeActive /> },
+      { id: 4, title: "Login", icon: <LockOpen />, action: handleLogin },
     ] as menuItem[];
 
   const handleLogout = () => {

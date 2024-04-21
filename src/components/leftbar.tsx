@@ -9,6 +9,9 @@ export default function LeftBar() {
       <Grid item xs={12}>
         <Tags />
       </Grid>
+      <Grid item xs={12}>
+        <MarketCoin />
+      </Grid>
     </Grid>
   );
 }
@@ -36,6 +39,32 @@ function Tags() {
           <Chip label={`${tag.name} (${tag.count})`} />
         </Grid>
       ))}
+    </Grid>
+  );
+}
+
+function MarketCoin() {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        Market Coin
+      </Grid>
+      <Grid item xs={12}>
+        <Coin />
+        <Coin />
+      </Grid>
+    </Grid>
+  );
+}
+function Coin() {
+  return (
+    <Grid container spacing={1}>
+      <Grid item xs={12}>
+        <Chip label="Bitcoin" />
+      </Grid>
+      <Grid item xs={12}>
+        <Chip label="Ethereum" />
+      </Grid>
     </Grid>
   );
 }

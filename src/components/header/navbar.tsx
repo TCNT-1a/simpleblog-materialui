@@ -27,7 +27,8 @@ export default function NavBar() {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    setMenuState(loginState());
+    router.push("/login");
+    // setMenuState(loginState());
   };
   const handleSeries = () => {
     router.push("/series");
@@ -35,21 +36,24 @@ export default function NavBar() {
   const handleHome = () => {
     router.push("/");
   };
+  const guestState = () => [
+    { id: 1, title: "Home", icon: <Person />, action: handleHome },
+    { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
+    { id: 3, title: "Airdrop", icon: <AirplanemodeActive /> },
+  ];
+
   const loginState = () =>
     [
-      { id: 1, title: "Home", icon: <Person />, action: handleHome },
-      { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-      { id: 3, title: "Airdrop", icon: <AirplanemodeActive /> },
+      ...guestState(),
       { id: 4, title: "Profile", icon: <AccountCircle /> },
       { id: 5, title: "Admin", icon: <AdminPanelSettings /> },
       { id: 6, title: "Logout", icon: <ExitToApp />, action: handleLogout },
+      ,
     ] as menuItem[];
 
   const logoutState = () =>
     [
-      { id: 1, title: "Home", icon: <Person />, action: handleHome },
-      { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-      { id: 3, title: "Airdrop", icon: <AirplanemodeActive /> },
+      ...guestState(),
       { id: 4, title: "Login", icon: <LockOpen />, action: handleLogin },
     ] as menuItem[];
 

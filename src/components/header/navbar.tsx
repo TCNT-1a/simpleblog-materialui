@@ -1,7 +1,9 @@
 "use client";
 import {
   AppBar,
+  Box,
   Button,
+  Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -126,14 +128,16 @@ function HorizontalMenu({ menuState }: { menuState: menuItem[] }) {
 function VerticalMenu({ menuState }: { menuState: menuItem[] }) {
   return (
     <>
-      <div>
+      <Grid spacing={2} style={{ display: "flex" }}>
         {menuState.map((item) => (
-          <Button key={item.id} color="inherit" onClick={item.action}>
-            {item.icon}
-            {item.title}
-          </Button>
+          <Grid item key={item.id}>
+            <Button key={item.id} color="inherit" onClick={item.action}>
+              {item.icon}
+              {item.title}
+            </Button>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </>
   );
 }

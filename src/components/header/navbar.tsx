@@ -35,13 +35,21 @@ export default function NavBar() {
   const handleSeries = () => {
     router.push("/series");
   };
+  const handleAirdrop = () => {
+    router.push("/airdrop");
+  };
   const handleHome = () => {
     router.push("/");
   };
   const guestState = () => [
     { id: 1, title: "Home", icon: <Person />, action: handleHome },
     { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-    { id: 3, title: "Airdrop", icon: <AirplanemodeActive /> },
+    {
+      id: 3,
+      title: "Airdrop",
+      icon: <AirplanemodeActive />,
+      action: handleAirdrop,
+    },
   ];
 
   const loginState = () =>

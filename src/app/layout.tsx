@@ -4,7 +4,8 @@ import "./globals.css";
 import Header from "@/components/header/header";
 import { Grid } from "@mui/material";
 import LeftBar from "@/components/leftbar";
-import { AppContext } from "./AppContext";
+import { AppContext } from "./context/AppContext";
+import { menuItem } from "./context/menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,8 +31,10 @@ export default function RootLayout({
             margin: "auto",
           }}
         >
-          {/* <AppContext.Provider value={{isLoggedIn:true, setLoggedIn: }}>{children}</AppContext.Provider> */}
-          {children}
+          <AppContext.Provider value={{ menuItem: [] as menuItem[] }}>
+            {children}
+          </AppContext.Provider>
+          {/* {children} */}
         </div>
       </body>
     </html>

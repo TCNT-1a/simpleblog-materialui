@@ -24,56 +24,7 @@ import { AppContext } from "@/app/context/AppContext";
 export default function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  // const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  // const router = useRouter();
-
-  // const handleLogin = () => {
-  //   setIsLoggedIn(true);
-  //   router.push("/login");
-  //   // setMenuState(loginState());
-  // };
-  // const handleSeries = () => {
-  //   router.push("/series");
-  // };
-  // const handleAirdrop = () => {
-  //   router.push("/airdrop");
-  // };
-  // const handleHome = () => {
-  //   router.push("/");
-  // };
-  // const guestState = () => [
-  //   { id: 1, title: "Home", icon: <Person />, action: handleHome },
-  //   { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-  //   {
-  //     id: 3,
-  //     title: "Airdrop",
-  //     icon: <AirplanemodeActive />,
-  //     action: handleAirdrop,
-  //   },
-  // ];
-
-  // const loginState = () =>
-  //   [
-  //     ...guestState(),
-  //     { id: 4, title: "Profile", icon: <AccountCircle /> },
-  //     { id: 5, title: "Admin", icon: <AdminPanelSettings /> },
-  //     { id: 6, title: "Logout", icon: <ExitToApp />, action: handleLogout },
-  //     ,
-  //   ] as menuItem[];
-
-  // const logoutState = () =>
-  //   [
-  //     ...guestState(),
-  //     { id: 4, title: "Login", icon: <LockOpen />, action: handleLogin },
-  //   ] as menuItem[];
-
-  // const handleLogout = () => {
-  //   setIsLoggedIn(false);
-  //   setMenuState(logoutState());
-  // };
   const { menuItem } = useContext(AppContext);
-  const [menuState, setMenuState] = React.useState(menuItem);
 
   return (
     <AppBar position="static" style={{ boxShadow: "none" }}>
@@ -84,9 +35,9 @@ export default function NavBar() {
         }}
       >
         {isMobile ? (
-          <HorizontalMenu menuState={menuState} />
+          <HorizontalMenu menuState={menuItem} />
         ) : (
-          <VerticalMenu menuState={menuState} />
+          <VerticalMenu menuState={menuItem} />
         )}
       </Toolbar>
     </AppBar>

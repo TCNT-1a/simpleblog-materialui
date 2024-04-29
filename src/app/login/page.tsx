@@ -1,10 +1,15 @@
 "use client";
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, MenuItem, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { menuItem, setMenuItem } = useContext(AppContext);
   function handleLogin() {
+    //setMenuItem([]);
+
     router.push("/");
   }
   return (

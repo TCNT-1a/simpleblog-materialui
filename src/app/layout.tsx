@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/header";
-import { Grid } from "@mui/material";
-import LeftBar from "@/components/leftbar";
-import { AppContext } from "./context/AppContext";
-import { menuItem } from "./context/menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,10 +26,7 @@ export default function RootLayout({
             margin: "auto",
           }}
         >
-          <AppContext.Provider value={{ menuItem: [] as menuItem[] }}>
-            {children}
-          </AppContext.Provider>
-          {/* {children} */}
+          {children}
         </div>
       </body>
     </html>

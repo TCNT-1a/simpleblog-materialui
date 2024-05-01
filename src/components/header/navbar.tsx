@@ -1,7 +1,9 @@
 "use client";
 import {
   AppBar,
+  Box,
   Button,
+  Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -14,43 +16,15 @@ import LockOpen from "@mui/icons-material/LockOpen";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import Person from "@mui/icons-material/Person";
 import MenuIcon from "@mui/icons-material/Menu";
-import React from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/navigation";
-
+import AirplanemodeActive from "@mui/icons-material/AirplanemodeActive";
+import AdminPanelSettings from "@mui/icons-material/AdminPanelSettings";
+import { AppContext } from "@/app/context/AppContext";
 export default function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const router = useRouter();
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    setMenuState(loginState());
-  };
-  const handleSeries = () => {
-    console.log("handleSerial");
-    router.push("/series");
-  };
-  const loginState = () =>
-    [
-      { id: 1, title: "Home", icon: <Person /> },
-      { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-      { id: 3, title: "Profile", icon: <AccountCircle /> },
-      { id: 4, title: "Logout", icon: <ExitToApp />, action: handleLogout },
-    ] as menuItem[];
-
-  const logoutState = () =>
-    [
-      { id: 1, title: "Home", icon: <Person /> },
-      { id: 2, title: "Series", icon: <AccountCircle />, action: handleSeries },
-      { id: 3, title: "Login", icon: <LockOpen />, action: handleLogin },
-    ] as menuItem[];
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setMenuState(logoutState());
-  };
-  const [menuState, setMenuState] = React.useState(logoutState());
+  const { menuItem } = useContext(AppContext);
 
   return (
     <AppBar position="static" style={{ boxShadow: "none" }}>
@@ -61,28 +35,16 @@ export default function NavBar() {
         }}
       >
         {isMobile ? (
-          <HorizontalMenu
-            menuState={menuState}
-            onMenuStateChange={setMenuState}
-          />
+          <HorizontalMenu menuState={menuItem} />
         ) : (
-          <VerticalMenu
-            menuState={menuState}
-            onMenuStateChange={setMenuState}
-          />
+          <VerticalMenu menuState={menuItem} />
         )}
       </Toolbar>
     </AppBar>
   );
 }
 
-function HorizontalMenu({
-  menuState,
-  onMenuStateChange,
-}: {
-  menuState: menuItem[];
-  onMenuStateChange: React.Dispatch<React.SetStateAction<menuItem[]>>;
-}) {
+function HorizontalMenu({ menuState }: { menuState: menuItem[] }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -124,23 +86,19 @@ function HorizontalMenu({
     </>
   );
 }
-function VerticalMenu({
-  menuState,
-  onMenuStateChange,
-}: {
-  menuState: menuItem[];
-  onMenuStateChange: React.Dispatch<React.SetStateAction<menuItem[]>>;
-}) {
+function VerticalMenu({ menuState }: { menuState: menuItem[] }) {
   return (
     <>
-      <div>
+      <Grid spacing={2} style={{ display: "flex" }}>
         {menuState.map((item) => (
-          <Button key={item.id} color="inherit" onClick={item.action}>
-            {item.icon}
-            {item.title}
-          </Button>
+          <Grid item key={item.id}>
+            <Button key={item.id} color="inherit" onClick={item.action}>
+              {item.icon}
+              {item.title}
+            </Button>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </>
   );
 }

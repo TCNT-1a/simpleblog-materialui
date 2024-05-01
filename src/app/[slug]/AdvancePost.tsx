@@ -1,17 +1,13 @@
 import { Button, Card, Chip, Grid, Typography, useTheme } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Image from "next/image";
-import { formatDateyyyyMMMdd, getLorem } from "./lorem";
-export function AdvancePost({ post }: { post: Post }) {
+import { formatDateyyyyMMMdd, getLorem } from "../data/lorem";
+import { layout_styles } from "./style";
+import Link from "next/link";
+export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
   const theme = useTheme();
   return (
-    <Card
-      key={post.id}
-      style={{
-        padding: 20,
-        margin: 10,
-      }}
-    >
+    <Card key={post.id} style={layout_styles}>
       <Grid
         container
         spacing={2}
@@ -29,17 +25,28 @@ export function AdvancePost({ post }: { post: Post }) {
           </Typography>
         </Grid>
       </Grid>
-      <h2 style={{ color: theme.palette.info.light }}>#{post.title}</h2>
+      <Link
+        href={`/${slug}/${post.slug}`}
+        passHref
+        style={{ textDecoration: "none" }}
+      >
+        <h3 style={{ color: theme.palette.info.light }}>
+          <span style={{ color: theme.palette.primary.dark }}># </span>
+          {post.title}
+        </h3>
+      </Link>
 
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <Image
-            alt="post image"
-            width={300}
-            height={200}
-            src={`https://picsum.photos/300/200?random=${post.id}`}
-            style={{ width: "100%" }}
-          ></Image>
+          <Card>
+            <Image
+              alt="post image"
+              width={300}
+              height={200}
+              src={`https://picsum.photos/300/200?random=${post.id}`}
+              style={{ width: "100%" }}
+            ></Image>
+          </Card>
         </Grid>
         <Grid item xs={8} style={{}}>
           <p
@@ -87,7 +94,7 @@ function ViewCount({ viewCount }: { viewCount: number }) {
     </Grid>
   );
 }
-function ViewCategory({ tags }: { tags: string }) {
+export function ViewCategory({ tags }: { tags: string }) {
   return (
     <Grid
       container
@@ -113,15 +120,17 @@ export type Post = {
   viewCount: number;
   tags: string;
   publicDate: string;
+  slug: string;
 };
 
 export function createPost(id: number) {
   return {
     id: id,
-    title: getLorem(10),
+    title: getLorem(10).toUpperCase(),
     content: getLorem(100),
     viewCount: 100,
     tags: "category1, category2, category3",
     publicDate: formatDateyyyyMMMdd(new Date()),
+    slug: "bai-viet-1",
   };
 }

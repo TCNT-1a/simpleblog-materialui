@@ -5,9 +5,9 @@ import { useAppContext } from "../context/AppWrapper";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { setMenuItem } = useAppContext();
+  const { setMenuLogin } = useAppContext();
   function handleLogin() {
-    // setMenuItem([]);
+    setMenuLogin();
     router.push("/");
   }
   return (

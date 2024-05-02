@@ -31,7 +31,7 @@ export default function Brand() {
           fontWeight={700}
           fontSize={26}
         >
-          TA CHI NGUYEN
+          TCNCrypto
         </Typography>
       </Grid>
     </Grid>

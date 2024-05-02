@@ -1,17 +1,18 @@
 "use client";
-import React, { ReactNode } from "react";
+import React, { ReactNode, use, useEffect } from "react";
 import AirplanemodeActive from "@mui/icons-material/AirplanemodeActive";
 import AdminPanelSettings from "@mui/icons-material/AdminPanelSettings";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockOpen from "@mui/icons-material/LockOpen";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import Person from "@mui/icons-material/Person";
-import { MenuState, menuItem } from "./menu";
+import { menuItem } from "./menu";
 import { useRouter } from "next/navigation";
 
 const AppContext = React.createContext({
   menuItem: [] as menuItem[],
-  setMenuItem: (menuItem: menuItem[]) => {},
+  setMenuLogout: () => {},
+  setMenuLogin: () => {},
 });
 
 export function useAppContext() {
@@ -22,7 +23,6 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
 
   const handleLogin = () => {
     navigate("/login");
-    setMenuItem(loginState());
   };
   const handleLogout = () => {
     setMenuItem(logoutState());
@@ -67,13 +67,24 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
       ...guestState(),
       { id: 4, title: "Login", icon: <LockOpen />, action: handleLogin },
     ] as menuItem[];
-  // const m = MenuState(handleHome, handleSeries, handleAirdrop, handleLogin, handleLogout).hello;
+
   const [menuItem, setMenuItem] = React.useState<menuItem[]>(loginState);
   function navigate(url: string) {
     router.push(url);
   }
+  useEffect(() => {
+    console.log(menuItem);
+  }, [menuItem]);
+
+  function setMenuLogin() {
+    setMenuItem(loginState());
+  }
+  function setMenuLogout() {
+    setMenuItem(logoutState());
+  }
+
   return (
-    <AppContext.Provider value={{ menuItem, setMenuItem }}>
+    <AppContext.Provider value={{ menuItem, setMenuLogin, setMenuLogout }}>
       {children}
     </AppContext.Provider>
   );

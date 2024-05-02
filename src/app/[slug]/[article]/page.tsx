@@ -1,15 +1,16 @@
 "use client";
-
+import { usePostsContext } from "@/app/context/PostsWarpper";
 export default function PostPageDetail({
   params,
 }: {
   params: { article: string };
 }) {
-  console.log(params);
+  const { posts } = usePostsContext();
+  const post = posts.filter((post) => post.slug === params.article)[0];
   return (
     <div>
-      <h1>Tên bài viết {params.article}</h1>
-      <p>This is the post page detail</p>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
     </div>
   );
 }

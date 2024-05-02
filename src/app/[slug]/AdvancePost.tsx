@@ -65,7 +65,13 @@ export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
       </Grid>
       <Grid container spacing={2}>
         <Grid item>
-          <Button variant="contained">Xem tiếp</Button>
+          <Link
+            href={`/${slug}/${post.slug}`}
+            // passHref
+            // style={{ textDecoration: "none" }}
+          >
+            <Button variant="contained">Xem tiếp</Button>
+          </Link>
         </Grid>
         <Grid item>
           <ViewCategory tags={post.tags} />
@@ -124,13 +130,15 @@ export type Post = {
 };
 
 export function createPost(id: number) {
+  const title = getLorem(10).toUpperCase();
+  const slug = title.toLowerCase().replace(/\s/g, "-");
   return {
     id: id,
-    title: getLorem(10).toUpperCase(),
+    title,
     content: getLorem(100),
     viewCount: 100,
     tags: "category1, category2, category3",
     publicDate: formatDateyyyyMMMdd(new Date()),
-    slug: "bai-viet-1",
+    slug,
   };
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AppWrapper } from "./context/AppWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +27,7 @@ export default function RootLayout({
             margin: "auto",
           }}
         >
-          {children}
+          <AppWrapper>{children}</AppWrapper>
         </div>
       </body>
     </html>

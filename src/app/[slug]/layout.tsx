@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import MainLayout from "../MainLayout";
+import { PostsWrapper } from "../context/PostsWarpper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,5 +15,9 @@ export default function SlugLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <MainLayout>{children}</MainLayout>;
+  return (
+    <MainLayout>
+      <PostsWrapper>{children}</PostsWrapper>
+    </MainLayout>
+  );
 }

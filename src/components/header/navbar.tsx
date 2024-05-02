@@ -20,11 +20,12 @@ import React, { useContext } from "react";
 import { useRouter } from "next/navigation";
 import AirplanemodeActive from "@mui/icons-material/AirplanemodeActive";
 import AdminPanelSettings from "@mui/icons-material/AdminPanelSettings";
-import { AppContext } from "@/app/context/AppContext";
+import { useAppContext } from "@/app/context/AppWrapper";
+
 export default function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { menuItem } = useContext(AppContext);
+  const { menuItem } = useAppContext();
 
   return (
     <AppBar position="static" style={{ boxShadow: "none" }}>

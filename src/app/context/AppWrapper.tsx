@@ -6,32 +6,35 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockOpen from "@mui/icons-material/LockOpen";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import Person from "@mui/icons-material/Person";
-import { menuItem } from "./menu";
+import { MenuState, menuItem } from "./menu";
 import { useRouter } from "next/navigation";
 
-export const AppContext = React.createContext({
+const AppContext = React.createContext({
   menuItem: [] as menuItem[],
-  setMenuItem: (value: menuItem[]) => {},
+  setMenuItem: (menuItem: menuItem[]) => {},
 });
 
-export const AppProvider = ({ children }: { children: ReactNode }) => {
+export function useAppContext() {
+  return React.useContext(AppContext);
+}
+export const AppWrapper = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   const handleLogin = () => {
-    router.push("/login");
+    navigate("/login");
     setMenuItem(loginState());
   };
   const handleLogout = () => {
     setMenuItem(logoutState());
   };
   const handleSeries = () => {
-    router.push("/series");
+    navigate("/series");
   };
   const handleAirdrop = () => {
-    router.push("/airdrop");
+    navigate("/airdrop");
   };
   const handleHome = () => {
-    router.push("/");
+    navigate("/");
   };
 
   const guestState = () => [
@@ -64,9 +67,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       ...guestState(),
       { id: 4, title: "Login", icon: <LockOpen />, action: handleLogin },
     ] as menuItem[];
-
+  // const m = MenuState(handleHome, handleSeries, handleAirdrop, handleLogin, handleLogout).hello;
   const [menuItem, setMenuItem] = React.useState<menuItem[]>(loginState);
-
+  function navigate(url: string) {
+    router.push(url);
+  }
   return (
     <AppContext.Provider value={{ menuItem, setMenuItem }}>
       {children}

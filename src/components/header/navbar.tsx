@@ -27,6 +27,7 @@ export default function NavBar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { menuItem, setActiveMenu } = useAppContext();
   const { activeMenu } = useAppContext();
+  theme.palette.background.paper;
   return (
     <AppBar position="static" style={{ boxShadow: "none" }}>
       <Toolbar
@@ -70,6 +71,8 @@ function HorizontalMenu({
   const handleClose = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     setAnchorEl(null);
   };
+  // const theme = useTheme();
+  // theme.palette.background.paper;
   return (
     <>
       <IconButton
@@ -90,6 +93,7 @@ function HorizontalMenu({
         {menuState.map((item) => (
           <MenuItem
             key={item.id}
+            style={activeMenu === item.id ? getStyleActiveMenuColor() : {}}
             onClick={(event) => {
               handleClose(event);
               setActiveMenu(item.id);
@@ -120,9 +124,7 @@ function VerticalMenu({
           <Grid
             item
             key={item.id}
-            style={{
-              background: activeMenu === item.id ? "brown" : "transparent",
-            }}
+            style={activeMenu === item.id ? getStyleActiveMenuColor() : {}}
           >
             <Button
               key={item.id}
@@ -149,3 +151,11 @@ type menuItem = {
   icon: React.ReactNode;
   id: number;
 };
+
+function getStyleActiveMenuColor() {
+  const theme = useTheme();
+  return {
+    background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+  };
+}

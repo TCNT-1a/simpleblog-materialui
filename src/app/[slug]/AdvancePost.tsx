@@ -65,7 +65,13 @@ export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
       </Grid>
       <Grid container spacing={2}>
         <Grid item>
-          <Button variant="contained">Xem tiếp</Button>
+          <Link
+            href={`/${slug}/${post.slug}`}
+            // passHref
+            // style={{ textDecoration: "none" }}
+          >
+            <Button variant="contained">Xem tiếp</Button>
+          </Link>
         </Grid>
         <Grid item>
           <ViewCategory tags={post.tags} />

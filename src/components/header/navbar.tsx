@@ -25,8 +25,8 @@ import { useAppContext } from "@/app/context/AppWrapper";
 export default function NavBar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { menuItem } = useAppContext();
-
+  const { menuItem, setActiveMenu } = useAppContext();
+  const { activeMenu } = useAppContext();
   return (
     <AppBar position="static" style={{ boxShadow: "none" }}>
       <Toolbar
@@ -36,16 +36,32 @@ export default function NavBar() {
         }}
       >
         {isMobile ? (
-          <HorizontalMenu menuState={menuItem} />
+          <HorizontalMenu
+            menuState={menuItem}
+            setActiveMenu={setActiveMenu}
+            activeMenu={activeMenu}
+          />
         ) : (
-          <VerticalMenu menuState={menuItem} />
+          <VerticalMenu
+            menuState={menuItem}
+            setActiveMenu={setActiveMenu}
+            activeMenu={activeMenu}
+          />
         )}
       </Toolbar>
     </AppBar>
   );
 }
 
-function HorizontalMenu({ menuState }: { menuState: menuItem[] }) {
+function HorizontalMenu({
+  menuState,
+  setActiveMenu,
+  activeMenu,
+}: {
+  menuState: menuItem[];
+  setActiveMenu: (id: number) => void;
+  activeMenu: number;
+}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -76,6 +92,7 @@ function HorizontalMenu({ menuState }: { menuState: menuItem[] }) {
             key={item.id}
             onClick={(event) => {
               handleClose(event);
+              setActiveMenu(item.id);
               if (item.action) item.action();
             }}
           >
@@ -87,13 +104,34 @@ function HorizontalMenu({ menuState }: { menuState: menuItem[] }) {
     </>
   );
 }
-function VerticalMenu({ menuState }: { menuState: menuItem[] }) {
+function VerticalMenu({
+  menuState,
+  setActiveMenu,
+  activeMenu,
+}: {
+  menuState: menuItem[];
+  setActiveMenu: (id: number) => void;
+  activeMenu: number;
+}) {
   return (
     <>
       <Grid spacing={2} style={{ display: "flex" }}>
         {menuState.map((item) => (
-          <Grid item key={item.id}>
-            <Button key={item.id} color="inherit" onClick={item.action}>
+          <Grid
+            item
+            key={item.id}
+            style={{
+              background: activeMenu === item.id ? "brown" : "transparent",
+            }}
+          >
+            <Button
+              key={item.id}
+              color="inherit"
+              onClick={(event) => {
+                setActiveMenu(item.id);
+                item.action();
+              }}
+            >
               {item.icon}
               {item.title}
             </Button>

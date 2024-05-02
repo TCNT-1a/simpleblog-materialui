@@ -14,6 +14,8 @@ const AppContext = React.createContext({
   menuItem: [] as menuItem[],
   setMenuLogout: () => {},
   setMenuLogin: () => {},
+  setActiveMenu: (id: number) => {},
+  activeMenu: 1,
 });
 
 export function useAppContext() {
@@ -45,7 +47,6 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
       title: "Home",
       href: "/",
       icon: <Person />,
-      active: false,
     },
     {
       action: handleSeries,
@@ -53,7 +54,6 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
       href: "/huong-dan-co-ban",
       icon: <AccountCircle />,
       id: 2,
-      active: false,
     },
     {
       action: handleAirdrop,
@@ -61,7 +61,6 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
       href: "/airdrop",
       icon: <AirplanemodeActive />,
       id: 3,
-      active: false,
     },
   ];
 
@@ -75,7 +74,6 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
         title: "Logout",
         icon: <ExitToApp />,
         action: handleLogout,
-        active: false,
       },
       ,
     ] as menuItem[];
@@ -88,23 +86,16 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
         title: "Login",
         icon: <LockOpen />,
         action: handleLogin,
-        active: false,
       },
     ] as menuItem[];
 
   const [menuItem, setMenuItem] = useState<menuItem[]>(loginState);
-  const [activeMenu, setActiveMenu] = useState<number | null>(null);
+  const [activeMenu, setActiveMenu] = useState<number>(1);
 
-  const handleMenuClick = (id: number) => {
-    setActiveMenu(id);
-  };
   function navigate(url: string) {
-    // setMenuItem(menuItem.map((item) => ({ ...item, active: false })));
     router.push(url);
   }
-  useEffect(() => {
-    // console.log(menuItem);
-  }, [menuItem]);
+  useEffect(() => {}, [menuItem]);
 
   function setMenuLogin() {
     setMenuItem(loginState());
@@ -112,9 +103,17 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
   function setMenuLogout() {
     setMenuItem(logoutState());
   }
-
+  console.log(activeMenu);
   return (
-    <AppContext.Provider value={{ menuItem, setMenuLogin, setMenuLogout }}>
+    <AppContext.Provider
+      value={{
+        menuItem,
+        setMenuLogin,
+        setMenuLogout,
+        activeMenu,
+        setActiveMenu,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

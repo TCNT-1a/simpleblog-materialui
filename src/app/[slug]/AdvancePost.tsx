@@ -43,7 +43,7 @@ export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
               alt="post image"
               width={300}
               height={200}
-              src={`https://picsum.photos/300/200?random=${post.id}`}
+              src={post.urlImages ? post.urlImages[0] : ""}
               style={{ width: "100%" }}
             ></Image>
           </Card>
@@ -127,6 +127,7 @@ export type Post = {
   tags: string;
   publicDate: string;
   slug: string;
+  urlImages?: string[];
 };
 
 export function createPost(id: number) {
@@ -140,5 +141,10 @@ export function createPost(id: number) {
     tags: "category1, category2, category3",
     publicDate: formatDateyyyyMMMdd(new Date()),
     slug,
+    urlImages: [getImage(id.toString())],
   };
+}
+
+function getImage(id: string) {
+  return `https://picsum.photos/300/200?random=${id}`;
 }

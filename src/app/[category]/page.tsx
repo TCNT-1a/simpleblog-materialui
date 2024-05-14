@@ -3,11 +3,11 @@
 import ListPost from "./ListPost";
 import { layout_styles } from "./style";
 
-export default function PostPage({ params }: { params: { slug: string } }) {
+export default function PostPage({ params }: { params: { category: string } }) {
   return (
     <div className="w">
       {/* <h2 style={layout_styles}>{params.slug}</h2> */}
-      <ListPost slug={params.slug}></ListPost>
+      <ListPost category={params.category}></ListPost>
     </div>
   );
 }

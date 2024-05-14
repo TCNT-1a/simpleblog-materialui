@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Post, createPost } from "../[slug]/AdvancePost";
+import { Post, createPost } from "../[category]/AdvancePost";
 
 const PostsContext = React.createContext({
   posts: [] as Post[],

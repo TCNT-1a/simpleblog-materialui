@@ -41,13 +41,13 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
   };
 
   const guestState = () => [
-    {
-      id: 1,
-      action: handleHome,
-      title: "Home",
-      href: "/",
-      icon: <Person />,
-    },
+    // {
+    //   id: 1,
+    //   action: handleHome,
+    //   title: "Home",
+    //   href: "/",
+    //   icon: <Person />,
+    // },
     {
       action: handleSeries,
       title: "Hướng dẫn cơ bản",

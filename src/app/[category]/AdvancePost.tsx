@@ -4,7 +4,13 @@ import Image from "next/image";
 import { formatDateyyyyMMMdd, getLorem } from "../data/lorem";
 import { layout_styles } from "./style";
 import Link from "next/link";
-export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
+export function AdvancePost({
+  post,
+  category,
+}: {
+  post: Post;
+  category: string;
+}) {
   const theme = useTheme();
   return (
     <Card key={post.id} style={layout_styles}>
@@ -26,7 +32,7 @@ export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
         </Grid>
       </Grid>
       <Link
-        href={`/${slug}/${post.slug}`}
+        href={`/${category}/${post.slug}`}
         passHref
         style={{ textDecoration: "none" }}
       >
@@ -66,7 +72,7 @@ export function AdvancePost({ post, slug }: { post: Post; slug: string }) {
       <Grid container spacing={2}>
         <Grid item>
           <Link
-            href={`/${slug}/${post.slug}`}
+            href={`/${category}/${post.slug}`}
             // passHref
             // style={{ textDecoration: "none" }}
           >

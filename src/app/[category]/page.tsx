@@ -8,9 +8,9 @@ export default async function PostPage({
 }: {
   params: { category: string };
 }) {
-  const url1 = `http://localhost:1337/api/blog/post?category=${params.category}`;
-  console.log("url1: ", url1);
-  const res = await fetch(url1);
+  const url = `http://localhost:1337/api/blog/post?category=${params.category}`;
+  console.log("url1: ", url);
+  const res = await fetch(url);
   const posts = await res.json();
   console.log("post: ", posts);
 

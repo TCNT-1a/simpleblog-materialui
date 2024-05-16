@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import MainLayout from "../MainLayout";
 import { PostsWrapper } from "../context/PostsWarpper";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ta Chi Nguyen - Blog",

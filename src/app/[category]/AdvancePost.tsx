@@ -1,9 +1,10 @@
 import { Button, Card, Chip, Grid, Typography, useTheme } from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import Image from "next/image";
 import { formatDateyyyyMMMdd, getLorem } from "../data/lorem";
 import { layout_styles } from "./style";
 import Link from "next/link";
+import { ViewCount } from "@/components/ViewCount";
 export function AdvancePost({
   post,
   category,
@@ -12,6 +13,7 @@ export function AdvancePost({
   category: string;
 }) {
   // const theme = useTheme();
+
   return (
     <Card key={post.id} style={layout_styles}>
       <Grid
@@ -23,7 +25,7 @@ export function AdvancePost({
         }}
       >
         <Grid item>
-          {/* <ViewCount viewCount={post.viewCount}></ViewCount> */}
+          <ViewCount viewCount={post.viewCount}></ViewCount>
         </Grid>
         <Grid item style={{ flexGrow: 1 }}>
           <Typography variant="body1" style={{ fontStyle: "italic" }}>
@@ -81,25 +83,6 @@ export function AdvancePost({
   );
 }
 
-function ViewCount({ viewCount }: { viewCount: number }) {
-  return (
-    <Grid
-      container
-      style={{
-        display: "flex",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      <Grid item>
-        <VisibilityIcon />
-      </Grid>
-      <Grid item>
-        <Typography variant="body1">{viewCount}</Typography>
-      </Grid>
-    </Grid>
-  );
-}
 export function ViewCategory({ tags }: { tags: string }) {
   return (
     <Grid

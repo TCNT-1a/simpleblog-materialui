@@ -1,33 +1,43 @@
 import { getApi2 } from "@/api-helper";
-import { usePostsContext } from "@/app/context/PostsWarpper";
+import { ViewCount } from "@/components/ViewCount";
+import { Box, Grid } from "@mui/material";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
-import Image from "next/image";
-import Markdown from "react-markdown";
-export default async function PostPageDetail({
-  params,
-}: {
+
+import type { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
   params: { post: string };
-}) {
-  // const { posts } = usePostsContext();
-  // const post = posts.filter((post) => post.slug === params.post)[0];
-  // const url = post.urlImages ? post.urlImages[0] : "";
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { data } = await getApi2(`api/blog/post/${params.post}`);
+  const { post } = data;
+
+  return {
+    title: post.title,
+    description: post.metaDescription,
+  };
+}
+
+export default async function PostPageDetail({ params, searchParams }: Props) {
   const { data } = await getApi2(`api/blog/post/${params.post}`);
   const { post } = data;
 
   return (
-    <div>
+    <>
       <h1>{post.title}</h1>
-      <p>{post.publicDate}</p>
-      {/* <p>
-        <Image
-          alt="post image"
-          width={300}
-          height={200}
-          src={post.urlImages ? post.urlImages[0] : ""}
-        ></Image>
-      </p> */}
+      <Grid container>
+        <Grid item>{post.publicDate}</Grid>
+        <Grid item>
+          <ViewCount viewCount={post.viewCount}></ViewCount>
+        </Grid>
+        <Grid item>{post.author.name}</Grid>
+      </Grid>
       <BlocksRenderer content={post.content} />;
-      {/* <Markdown>{post.content}</Markdown> */}
-    </div>
+    </>
   );
 }

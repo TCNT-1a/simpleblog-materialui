@@ -13,3 +13,11 @@ export function getApi() {
     },
   });
 }
+
+export async function getApi2(path: string) {
+  const host = "http://localhost:1337";
+  const url = `${host}/${path}`;
+  const res = await fetch(url, { cache: "no-store" });
+  const data = await res.json();
+  return data;
+}

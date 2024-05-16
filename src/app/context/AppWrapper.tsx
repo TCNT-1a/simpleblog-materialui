@@ -103,7 +103,7 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
   function setMenuLogout() {
     setMenuItem(logoutState());
   }
-  console.log(activeMenu);
+  // console.log(activeMenu);
   return (
     <AppContext.Provider
       value={{

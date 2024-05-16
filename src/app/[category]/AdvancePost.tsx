@@ -11,7 +11,7 @@ export function AdvancePost({
   post: Post;
   category: string;
 }) {
-  const theme = useTheme();
+  // const theme = useTheme();
   return (
     <Card key={post.id} style={layout_styles}>
       <Grid
@@ -23,7 +23,7 @@ export function AdvancePost({
         }}
       >
         <Grid item>
-          <ViewCount viewCount={post.viewCount}></ViewCount>
+          {/* <ViewCount viewCount={post.viewCount}></ViewCount> */}
         </Grid>
         <Grid item style={{ flexGrow: 1 }}>
           <Typography variant="body1" style={{ fontStyle: "italic" }}>
@@ -36,23 +36,19 @@ export function AdvancePost({
         passHref
         style={{ textDecoration: "none" }}
       >
-        <h3 style={{ color: theme.palette.info.light }}>
+        {/* <h3 style={{ color: theme.palette.info.light }}>
           <span style={{ color: theme.palette.primary.dark }}># </span>
+          {post.title}
+        </h3> */}
+        <h3>
+          <span># </span>
           {post.title}
         </h3>
       </Link>
 
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          <Card>
-            <Image
-              alt="post image"
-              width={300}
-              height={200}
-              src={post.urlImages ? post.urlImages[0] : ""}
-              style={{ width: "100%" }}
-            ></Image>
-          </Card>
+          <Card>{showImage(post)}</Card>
         </Grid>
         <Grid item xs={8} style={{}}>
           <p
@@ -65,7 +61,7 @@ export function AdvancePost({
               overflow: "hidden",
             }}
           >
-            {post.content}
+            {post.metaDescription}
           </p>
         </Grid>
       </Grid>
@@ -79,9 +75,7 @@ export function AdvancePost({
             <Button variant="contained">Xem tiếp</Button>
           </Link>
         </Grid>
-        <Grid item>
-          <ViewCategory tags={post.tags} />
-        </Grid>
+        <Grid item>{/* <ViewCategory tags={post.tags} /> */}</Grid>
       </Grid>
     </Card>
   );
@@ -133,7 +127,8 @@ export type Post = {
   tags: string;
   publicDate: string;
   slug: string;
-  urlImages?: string[];
+  featureImage?: any[];
+  metaDescription: string;
 };
 
 export function createPost(id: number) {
@@ -153,4 +148,24 @@ export function createPost(id: number) {
 
 function getImage(id: string) {
   return `https://picsum.photos/300/200?random=${id}`;
+}
+
+function showImage(post: Post) {
+  let path: string;
+  // console.log("post: ", post);
+  if (post.featureImage) {
+    const { url } = post.featureImage[0];
+    console.log("url: ", url);
+    path = `http://localhost:1337${url}`;
+    console.log("path: ", path);
+  } else path = getImage(post.id.toString());
+  return (
+    <img
+      alt="post image"
+      width={300}
+      height={200}
+      src={path}
+      style={{ width: "100%" }}
+    />
+  );
 }

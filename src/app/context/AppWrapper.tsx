@@ -48,26 +48,12 @@ export const AppWrapper = ({
   };
 
   const guestState = () => [
-    // {
-    //   id: 1,
-    //   action: handleHome,
-    //   title: "Home",
-    //   href: "/",
-    //   icon: <Person />,
-    // },
     {
-      action: handleSeries,
-      title: "Hướng dẫn cơ bản",
-      href: "/huong-dan-co-ban",
-      icon: <AccountCircle />,
-      id: 2,
-    },
-    {
-      action: handleAirdrop,
-      title: "Airdrop",
-      href: "/airdrop",
-      icon: <AirplanemodeActive />,
-      id: 3,
+      id: 1,
+      action: handleHome,
+      title: "Home",
+      href: "/",
+      icon: <Person />,
     },
   ];
 

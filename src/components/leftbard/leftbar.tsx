@@ -1,5 +1,6 @@
 import { getApi2 } from "@/api-helper";
-import { Chip, Grid } from "@mui/material";
+import { Chip, Grid, Box } from "@mui/material";
+import Link from "next/link";
 
 export default function LeftBar() {
   return (
@@ -11,7 +12,7 @@ export default function LeftBar() {
         <Tags />
       </Grid>
       <Grid item xs={12}>
-        <MarketCoin />
+        <Categories />
       </Grid>
     </Grid>
   );
@@ -39,28 +40,18 @@ async function Tags() {
   );
 }
 
-function MarketCoin() {
-  return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        Market Coin
-      </Grid>
-      <Grid item xs={12}>
-        <Coin />
-        <Coin />
-      </Grid>
-    </Grid>
-  );
-}
-function Coin() {
+async function Categories() {
+  const { data } = await getApi2("api/blog/category");
+  const categories = data.categories;
+
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12}>
-        <Chip label="Bitcoin" />
-      </Grid>
-      <Grid item xs={12}>
-        <Chip label="Ethereum" />
-      </Grid>
+      <Box>Category</Box>
+      {categories.map((category: any) => (
+        <Grid item xs={12}>
+          <Link href={`/${category.slug}`}>{category.name}</Link>
+        </Grid>
+      ))}
     </Grid>
   );
 }

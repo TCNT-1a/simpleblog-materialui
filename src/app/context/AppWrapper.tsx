@@ -16,14 +16,21 @@ const AppContext = React.createContext({
   setMenuLogin: () => {},
   setActiveMenu: (id: number) => {},
   activeMenu: 1,
+  categories: [],
 });
 
 export function useAppContext() {
   return React.useContext(AppContext);
 }
-export const AppWrapper = ({ children }: { children: ReactNode }) => {
+export const AppWrapper = ({
+  categories,
+  children,
+}: {
+  categories: any;
+  children: ReactNode;
+}) => {
   const router = useRouter();
-
+  console.log(categories);
   const handleLogin = () => {
     navigate("/login");
   };
@@ -112,6 +119,7 @@ export const AppWrapper = ({ children }: { children: ReactNode }) => {
         setMenuLogout,
         activeMenu,
         setActiveMenu,
+        categories,
       }}
     >
       {children}

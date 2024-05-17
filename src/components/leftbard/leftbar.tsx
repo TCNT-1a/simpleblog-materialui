@@ -1,3 +1,4 @@
+import { getApi2 } from "@/api-helper";
 import { Chip, Grid } from "@mui/material";
 
 export default function LeftBar() {
@@ -15,15 +16,10 @@ export default function LeftBar() {
     </Grid>
   );
 }
-const tags = [
-  { name: "React", count: 10 },
-  { name: "Next", count: 5 },
-  { name: "Node", count: 3 },
-  { name: "TypeScript", count: 2 },
-  { name: "JavaScript", count: 1 },
-];
 
-function Tags() {
+async function Tags() {
+  const { data } = await getApi2("api/blog/tags");
+  const tags = data.tags;
   return (
     <Grid
       container
@@ -34,7 +30,7 @@ function Tags() {
         textAlign: "center",
       }}
     >
-      {tags.map((tag) => (
+      {tags.map((tag: any) => (
         <Grid item key={tag.name}>
           <Chip label={`${tag.name} (${tag.count})`} />
         </Grid>

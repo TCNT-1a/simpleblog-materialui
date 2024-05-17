@@ -1,5 +1,5 @@
 import { getApi2 } from "@/api-helper";
-import { ViewCount } from "@/components/ViewCount";
+import { NumberOfView } from "@/components/NumberOfView";
 import { Box, Grid } from "@mui/material";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
@@ -30,10 +30,10 @@ export default async function PostPageDetail({ params, searchParams }: Props) {
   return (
     <>
       <h1>{post.title}</h1>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item>{post.publicDate}</Grid>
         <Grid item>
-          <ViewCount viewCount={post.viewCount}></ViewCount>
+          <NumberOfView viewNumber={post.viewCount}></NumberOfView>
         </Grid>
         <Grid item>{post.author.name}</Grid>
       </Grid>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid, Box } from "@mui/material";
 import Header from "@/components/header/header";
-import LeftBar from "@/components/leftbar";
-import { AppWrapper } from "./context/AppWrapper";
+import LeftBar from "@/components/leftbard/leftbar";
+// import { AppWrapper } from "./context/AppWrapper";
 
 export default function MainLayout({
   children,

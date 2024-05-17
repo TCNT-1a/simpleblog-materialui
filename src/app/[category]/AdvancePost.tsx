@@ -15,7 +15,8 @@ export function AdvancePost({
   // const theme = useTheme();
 
   return (
-    <Card key={post.id} style={layout_styles}>
+    // <Card key={post.id} style={layout_styles}>
+    <>
       <Grid
         container
         spacing={2}
@@ -76,7 +77,7 @@ export function AdvancePost({
           <Tags post={post} />
         </Grid>
       </Grid>
-    </Card>
+    </>
   );
 }
 

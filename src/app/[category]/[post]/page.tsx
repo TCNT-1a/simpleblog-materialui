@@ -37,7 +37,7 @@ export default async function PostPageDetail({ params, searchParams }: Props) {
         </Grid>
         <Grid item>{post.author.name}</Grid>
       </Grid>
-      <BlocksRenderer content={post.content} />;
+      {post.content ? <BlocksRenderer content={post.content} /> : null};
     </>
   );
 }

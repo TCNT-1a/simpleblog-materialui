@@ -1,0 +1,114 @@
+import { StyledCard } from "@/components/StyleCard";
+import { Button, Card, Chip, Grid, Typography, useTheme } from "@mui/material";
+import Link from "next/link";
+import { DateRange } from "@mui/icons-material";
+import { StyleLink } from "@/components/StyleLink";
+import { Tags } from "./Tags";
+import { Thumbnail } from "./Thumbnail";
+import { Post } from "./post";
+export function SnapPost({ post }: { post: Post }) {
+  return (
+    <StyledCard>
+      <Grid
+        container
+        spacing={2}
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <TitlePost post={post} />
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Card>{Thumbnail(post)}</Card>
+        </Grid>
+        <Description post={post} />
+      </Grid>
+      <SnapPostFooter post={post} />
+    </StyledCard>
+  );
+}
+
+function TitlePost({ post }: { post: Post }) {
+  return (
+    <Grid item>
+      <StyleLink
+        href={`/${post.category.slug}/${post.slug}`}
+        passHref
+        style={{ textDecoration: "none" }}
+      >
+        <Typography variant="h3">
+          <span># </span>
+          {post.title}
+        </Typography>
+      </StyleLink>
+    </Grid>
+  );
+}
+export function DatePost({ post }: { post: Post }) {
+  return post.publicDate ? (
+    <Grid
+      container
+      spacing={1}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <Grid item>
+        <DateRange />
+      </Grid>
+      <Grid item>{post.publicDate}</Grid>
+    </Grid>
+  ) : null;
+}
+
+function Description({ post }: { post: Post }) {
+  return (
+    <Grid item xs={8} style={{}}>
+      <p
+        style={{
+          fontSize: 14,
+          lineHeight: 1.6,
+          display: "-webkit-box",
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 8,
+          overflow: "hidden",
+          width: 240,
+        }}
+      >
+        {post.metaDescription}
+      </p>
+    </Grid>
+  );
+}
+function SnapPostFooter({ post }: { post: Post }) {
+  return (
+    <Grid container spacing={2}>
+      <Grid item>
+        <Tags post={post} />
+      </Grid>
+      <Grid item>
+        <DatePost post={post} />
+      </Grid>
+      {/* <Grid item>
+        <ButtonDetail post={post} />
+      </Grid> */}
+    </Grid>
+  );
+}
+function ButtonDetail({ post }: { post: Post }) {
+  return (
+    <Link
+      href={`/${post.category.slug}/${post.slug}`}
+      style={{ textDecoration: "none" }}
+    >
+      <Button variant="contained">Xem tiếp</Button>
+    </Link>
+  );
+}
+//
+//Nồi cơm điện là thiết bị không thể thiếu trong mỗi gia đình. Hãy xem ngay bài viết này để biết cách sử dụng nồi cơm điện sao cho bền và tiết kiệm điện nhé!

@@ -27,7 +27,7 @@ export async function generateMetadata(
 export default async function PostPageDetail({ params, searchParams }: Props) {
   const { data } = await getApi2(`api/blog/post/${params.post}`);
   const { post } = data;
-  console.log("post", post);
+
   if (post == null) return <Custom404></Custom404>;
   else
     return (

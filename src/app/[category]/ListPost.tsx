@@ -1,19 +1,13 @@
 import { getApi2 } from "@/api-helper";
-import { AdvancePost } from "./AdvancePost";
+import { SnapPost } from "../../components/snappost/SnapPost";
 import Custom404 from "../404";
 
-export default async function ListPost({ category }: { category: string }) {
-  const { data } = await getApi2(`api/blog/post?category=${category}`);
-  const { posts } = data;
+export default async function ListPost({ posts }: { posts: any[] }) {
   if (posts.length == 0) return <Custom404></Custom404>;
   return (
     <>
       {posts.map((post: any) => (
-        <AdvancePost
-          key={post.id}
-          post={post}
-          category={category}
-        ></AdvancePost>
+        <SnapPost key={post.id} post={post}></SnapPost>
       ))}
     </>
   );

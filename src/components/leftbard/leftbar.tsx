@@ -1,27 +1,6 @@
 import { getApi2 } from "@/api-helper";
-import { Chip, Grid, Box, Typography, makeStyles } from "@mui/material";
-import Link from "next/link";
-
-//   link: {
-//     fontSize: 14,
-//     textDecoration: "none",
-//     color: "#000",
-//     "&:hover": {
-//       color: "#3f51b5", // Change color when hover
-//     },
-//   },
-// }
-
-const styles = {
-  link: {
-    fontSize: 14,
-    textDecoration: "none",
-    color: "#000",
-    "&:hover": {
-      color: "#3f51b5", // Change color when hover
-    },
-  },
-};
+import { Chip, Grid, Box, Typography, makeStyles, styled } from "@mui/material";
+import { StyleLink } from "../StyleLink";
 
 export default function LeftBar() {
   return (
@@ -43,7 +22,9 @@ async function Tags() {
     <Block name="Tags">
       {tags.map((tag: any) => (
         <Grid item xs={12} key={tag.name}>
-          <Chip label={`${tag.name} (${tag.count})`} />
+          <StyleLink href={`/tag/${tag.slug}`} passHref>
+            <Chip label={`${tag.name} (${tag.count})`} />
+          </StyleLink>
         </Grid>
       ))}
     </Block>
@@ -53,13 +34,12 @@ async function Tags() {
 async function Categories() {
   const { data } = await getApi2("api/blog/category");
   const categories = data.categories;
-  // const classes = useStyles();
 
   return (
     <Block name="Category">
       {categories.map((category: any) => (
         <Grid item xs={12} key={category.slug}>
-          <Link href={`/${category.slug}`}>{category.name}</Link>
+          <StyleLink href={`/${category.slug}`}>{category.name}</StyleLink>
         </Grid>
       ))}
     </Block>

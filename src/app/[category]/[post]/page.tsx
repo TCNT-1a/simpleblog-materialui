@@ -1,10 +1,11 @@
 import { getApi2 } from "@/api-helper";
 import { NumberOfView } from "@/components/NumberOfView";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 import type { Metadata, ResolvingMetadata } from "next";
 import Custom404 from "../../404";
+import { PostDate } from "@/components/snappost/SnapPost";
 
 type Props = {
   params: { post: string };
@@ -32,9 +33,11 @@ export default async function PostPageDetail({ params, searchParams }: Props) {
   else
     return (
       <>
-        <h1>{post.title}</h1>
+        <Typography variant="h1"> {post.title}</Typography>
         <Grid container spacing={2}>
-          <Grid item>{post.publicDate}</Grid>
+          <Grid item>
+            <PostDate post={post}></PostDate>
+          </Grid>
           <Grid item>
             <NumberOfView viewNumber={post.viewCount}></NumberOfView>
           </Grid>

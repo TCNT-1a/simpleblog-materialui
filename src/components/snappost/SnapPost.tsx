@@ -58,7 +58,7 @@ function TitlePost({ post }: { post: Post }) {
     </Grid>
   );
 }
-export function DatePost({ post }: { post: Post }) {
+export function PostDate({ post }: { post: Post }) {
   return post.publicDate ? (
     <Box
       style={{
@@ -102,7 +102,7 @@ function SnapPostFooter({ post }: { post: Post }) {
         <Tags post={post} />
       </Grid>
       <Grid item>
-        <DatePost post={post} />
+        <PostDate post={post} />
       </Grid>
       {/* <Grid item>
         <ButtonDetail post={post} />

@@ -1,5 +1,13 @@
 import { StyledCard } from "@/components/StyleCard";
-import { Button, Card, Chip, Grid, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Chip,
+  Grid,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import Link from "next/link";
 import { DateRange } from "@mui/icons-material";
 import { StyleLink } from "@/components/StyleLink";
@@ -8,7 +16,7 @@ import { Thumbnail } from "./Thumbnail";
 import { Post } from "./post";
 export function SnapPost({ post }: { post: Post }) {
   return (
-    <Grid xs={8} sx={{ margin: 5 }}>
+    <Grid sx={{ margin: 5 }}>
       <StyledCard>
         <Grid
           container
@@ -52,20 +60,19 @@ function TitlePost({ post }: { post: Post }) {
 }
 export function DatePost({ post }: { post: Post }) {
   return post.publicDate ? (
-    <Grid
-      container
-      spacing={1}
+    <Box
       style={{
         display: "flex",
         alignItems: "center",
         textAlign: "center",
+        textDecoration: "italic",
       }}
     >
-      <Grid item>
-        <DateRange />
-      </Grid>
-      <Grid item>{post.publicDate}</Grid>
-    </Grid>
+      <DateRange />
+      <small>
+        <em>{post.publicDate}</em>
+      </small>
+    </Box>
   ) : null;
 }
 

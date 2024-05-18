@@ -31,7 +31,7 @@ export default function Brand() {
           fontWeight={700}
           fontSize={26}
         >
-          TCN Crypto
+          tcncrypto
         </Typography>
       </Grid>
     </Grid>

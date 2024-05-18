@@ -16,7 +16,7 @@ export default function Header() {
               <Brand></Brand>
             </Grid>
             <Grid item xs={isMobile ? 12 : 7}>
-              <NavBar></NavBar>
+              {/* <NavBar></NavBar> */}
             </Grid>
           </Grid>
         </Grid>

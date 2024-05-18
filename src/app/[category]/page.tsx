@@ -11,7 +11,6 @@ export default async function PostPage({
 }) {
   return (
     <div className="w">
-      <h1>Post</h1>
       <ListPost category={params.category}></ListPost>
     </div>
   );

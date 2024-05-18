@@ -8,26 +8,29 @@ import { Thumbnail } from "./Thumbnail";
 import { Post } from "./post";
 export function SnapPost({ post }: { post: Post }) {
   return (
-    <StyledCard>
-      <Grid
-        container
-        spacing={2}
-        style={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <TitlePost post={post} />
-      </Grid>
-
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <Card>{Thumbnail(post)}</Card>
+    <Grid xs={8} sx={{ margin: 5 }}>
+      <StyledCard>
+        <Grid
+          container
+          spacing={2}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: 20,
+          }}
+        >
+          <TitlePost post={post} />
         </Grid>
-        <Description post={post} />
-      </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <Card>{Thumbnail(post)}</Card>
+          </Grid>
+          <Description post={post} />
+        </Grid>
+      </StyledCard>
       <SnapPostFooter post={post} />
-    </StyledCard>
+    </Grid>
   );
 }
 
@@ -87,7 +90,7 @@ function Description({ post }: { post: Post }) {
 }
 function SnapPostFooter({ post }: { post: Post }) {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{ marginTop: "2px" }}>
       <Grid item>
         <Tags post={post} />
       </Grid>

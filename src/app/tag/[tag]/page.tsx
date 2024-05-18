@@ -9,7 +9,7 @@ type Props = {
 
 export default async function TagPage({ params, searchParams }: Props) {
   console.log("aa", params.tag);
-  const { data } = await getApi2(`api/blog/post?tag/${params.tag}`);
+  const { data } = await getApi2(`api/blog/post?tag=${params.tag}`);
   console.log(data);
   const { posts } = data;
 

@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { SnapPost } from "../../components/snappost/SnapPost";
 import Custom404 from "../404";
 

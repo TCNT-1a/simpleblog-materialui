@@ -2,6 +2,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { backend_api } from "../api.config";
+import { HOST } from "./path.config";
 
 export function getApi() {
   const token = Cookies.get("token");
@@ -15,8 +16,7 @@ export function getApi() {
 }
 
 export async function getApi2(path: string) {
-  const host = "http://localhost:1337";
-  const url = `${host}/${path}`;
+  const url = `${HOST}/${path}`;
   const res = await fetch(url, { cache: "no-store" });
   const data = await res.json();
   return data;

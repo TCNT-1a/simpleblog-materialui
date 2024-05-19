@@ -23,6 +23,7 @@ export default function MainLayout({
   return (
     <ThemeProvider theme={defaultTheme}>
       <Header></Header>
+      <div className="grid grid"></div>
       <Grid container>
         <Grid item xs={isMobile ? 12 : 3}>
           <LeftBar />

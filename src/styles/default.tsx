@@ -1,11 +1,13 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
+const colors = { c1: "#DBA979", c2: "#E8EFCF", c3: "#211551", c4: "#AFD198" };
 
 const defaultTheme = createTheme({
   typography: {
     h1: {
       fontSize: "2.3rem",
       fontWeight: "bold",
+      color: colors.c4,
     },
     h2: {
       fontSize: "2.0rem",
@@ -15,7 +17,7 @@ const defaultTheme = createTheme({
       fontSize: "1.7rem",
       fontWeight: "bold",
       textTransform: "uppercase",
-      color: "#AFD198",
+      color: colors.c4,
     },
     h4: {
       fontSize: "1.5rem",
@@ -42,10 +44,10 @@ const defaultTheme = createTheme({
     //   contrastText: "#AFD198",
     // },
     primary: {
-      light: "#DBA979",
-      main: "#E8EFCF",
-      dark: "#211551",
-      contrastText: "#AFD198",
+      light: colors.c1,
+      main: colors.c2,
+      dark: colors.c3,
+      contrastText: colors.c4,
     },
     secondary: {
       light: "#ff7961",

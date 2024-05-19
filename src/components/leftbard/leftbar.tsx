@@ -1,6 +1,8 @@
 import { getApi2 } from "@/api-helper";
 import { Chip, Grid, Box, Typography, makeStyles, styled } from "@mui/material";
 import { StyleLink } from "../StyleLink";
+import HandymanIcon from "@mui/icons-material/Handyman";
+import TouchAppIcon from "@mui/icons-material/TouchApp";
 
 export default function LeftBar() {
   return (
@@ -39,7 +41,10 @@ async function Categories() {
     <Block name="Category">
       {categories.map((category: any) => (
         <Grid item xs={12} key={category.slug}>
-          <StyleLink href={`/${category.slug}`}>{category.name}</StyleLink>
+          <StyleLink href={`/${category.slug}`}>
+            <TouchAppIcon />
+            {category.name}
+          </StyleLink>
         </Grid>
       ))}
     </Block>

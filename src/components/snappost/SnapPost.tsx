@@ -24,17 +24,18 @@ export function SnapPost({ post }: { post: Post }) {
           style={{
             display: "flex",
             alignItems: "center",
-            padding: 20,
+            padding: 5,
           }}
         >
-          <TitlePost post={post} />
-        </Grid>
-
-        <Grid container spacing={2}>
           <Grid item xs={4}>
-            <Card>{Thumbnail(post)}</Card>
+            {Thumbnail(post)}
           </Grid>
-          <Description post={post} />
+          <Grid item xs={8}>
+            <Grid container>
+              <TitlePost post={post} />
+              <Description post={post} />
+            </Grid>
+          </Grid>
         </Grid>
       </StyledCard>
       <SnapPostFooter post={post} />
@@ -78,7 +79,7 @@ export function PostDate({ post }: { post: Post }) {
 
 function Description({ post }: { post: Post }) {
   return (
-    <Grid item xs={8} style={{}}>
+    <Grid item xs={12} style={{}}>
       <p
         style={{
           fontSize: 14,
@@ -104,9 +105,6 @@ function SnapPostFooter({ post }: { post: Post }) {
       <Grid item>
         <PostDate post={post} />
       </Grid>
-      {/* <Grid item>
-        <ButtonDetail post={post} />
-      </Grid> */}
     </Grid>
   );
 }

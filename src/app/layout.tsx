@@ -21,17 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div
-          style={{
-            paddingLeft: 20,
-            paddingRight: 20,
-            paddingTop: 20,
-            maxWidth: 1200,
-            margin: "auto",
-          }}
-        >
-          <AppWrapper categories={categories}>{children}</AppWrapper>
-        </div>
+        <AppWrapper categories={categories}>{children}</AppWrapper>
       </body>
     </html>
   );

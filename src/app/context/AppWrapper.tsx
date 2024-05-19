@@ -9,6 +9,7 @@ import Person from "@mui/icons-material/Person";
 import { menuItem } from "./menu";
 import { useRouter } from "next/navigation";
 import { act } from "react-dom/test-utils";
+import { Box } from "@mui/material";
 
 const AppContext = React.createContext({
   menuItem: [] as menuItem[],
@@ -108,7 +109,17 @@ export const AppWrapper = ({
         categories,
       }}
     >
-      {children}
+      <Box
+        style={{
+          paddingLeft: 20,
+          paddingRight: 20,
+          paddingTop: 20,
+          maxWidth: 1600,
+          margin: "auto",
+        }}
+      >
+        {children}
+      </Box>
     </AppContext.Provider>
   );
 };

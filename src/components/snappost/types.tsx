@@ -6,7 +6,7 @@ export type Post = {
   tags: { id: number; tagName: string }[];
   publicDate: string;
   slug: string;
-  featureImage?: any[];
+  featureImage?: any;
   metaDescription: string;
   category: { slug: string };
 };

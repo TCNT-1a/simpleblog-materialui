@@ -45,7 +45,7 @@ export default async function PostPageDetail({ params, searchParams }: Props) {
             <AvatarUser author={post.author}></AvatarUser>
           </Grid>
         </Grid>
-        {post.content ? <BlocksRenderer content={post.content} /> : null};
+        {post.content ? <BlocksRenderer content={post.content} /> : null}
       </>
     );
 }

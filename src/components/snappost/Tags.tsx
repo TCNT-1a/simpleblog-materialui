@@ -1,5 +1,5 @@
 import { Chip, Grid } from "@mui/material";
-import { Post } from "./post";
+import { Post } from "./types";
 
 export function Tags({ post }: { post: Post }) {
   const tags = post.tags;

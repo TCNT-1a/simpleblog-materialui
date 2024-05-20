@@ -13,7 +13,7 @@ import { DateRange } from "@mui/icons-material";
 import { StyleLink } from "@/components/StyleLink";
 import { Tags } from "./Tags";
 import { Thumbnail } from "./Thumbnail";
-import { Post } from "./post";
+import { Post } from "./types";
 export function SnapPost({ post }: { post: Post }) {
   return (
     <Grid sx={{ margin: 5 }}>

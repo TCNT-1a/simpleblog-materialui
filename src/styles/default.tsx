@@ -8,6 +8,7 @@ const defaultTheme = createTheme({
       fontSize: "2.3rem",
       fontWeight: "bold",
       color: colors.c4,
+      textTransform: "uppercase",
     },
     h2: {
       fontSize: "2.0rem",

@@ -1,5 +1,3 @@
-//"use client";
-
 import { Metadata } from "next";
 import ListPost from "./ListPost";
 import { layout_styles } from "./style";

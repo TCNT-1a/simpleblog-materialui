@@ -1,12 +1,12 @@
 import { HOST } from "@/path.config";
-import { Post } from "./post";
+import { Post } from "./types";
 import Image from "next/image";
 export function Thumbnail(post: Post) {
   let path: string;
   const w = 300;
   const h = 188;
   if (post.featureImage) {
-    const { url } = post.featureImage[0];
+    const { url } = post.featureImage;
     path = `${HOST}${url}`;
     console.log("path", path);
   } else path = getImage(post.id.toString(), w, h);

@@ -31,7 +31,8 @@ export default function Brand() {
           fontWeight={700}
           fontSize={26}
         >
-          tcncrypto
+          {/* airwork chain */}
+          Home Care
         </Typography>
       </Grid>
     </Grid>

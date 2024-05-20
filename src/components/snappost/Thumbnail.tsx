@@ -1,7 +1,7 @@
 import { HOST } from "@/path.config";
 import { Post } from "./types";
 import Image from "next/image";
-export function Thumbnail(post: Post) {
+export function Thumbnail({ post }: { post: Post }) {
   let path: string;
   const w = 400;
   const h = 300;

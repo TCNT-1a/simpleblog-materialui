@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import 'flowbite/dist/flowbite.css';
 :root {
     --main-font-size: 1.2rem;
     --main-font-weight: bold;

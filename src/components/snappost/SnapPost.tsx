@@ -1,28 +1,31 @@
-import { Box, Button, Grid } from "@mui/material";
 import Link from "next/link";
-import { DateRange } from "@mui/icons-material";
+
 import { Tags } from "./Tags";
 import { Thumbnail } from "./Thumbnail";
 import { Post } from "./types";
+import { Button } from "flowbite-react";
+import PostDate from "./PostDate";
+import SnapPostMeta from "./SnapPostMeta";
 export function SnapPost({ post }: { post: Post }) {
   return (
-    <div className="post-snap p-5-5">
-      <div className="flex flex-col sm:flex-row">
-        <div className="w-12/12 sm:w-4/12">{Thumbnail(post)}</div>
+    <div className="post-snap mb-5">
+      <div className="flex flex-col sm:flex-row ">
+        <div className="w-12/12 sm:w-4/12">
+          <Thumbnail post={post} />
+        </div>
         <div className="flex flex-col bg-color2 w-12/12 sm:w-8/12">
           <TitlePost post={post} />
-
           <Description post={post} />
         </div>
       </div>
-      <SnapPostFooter post={post} />
+      <SnapPostMeta post={post} />
     </div>
   );
 }
 
 function TitlePost({ post }: { post: Post }) {
   return (
-    <Link href={`/${post.category.slug}/${post.slug}`}>
+    <Link className="pt-5" href={`/${post.category.slug}/${post.slug}`}>
       <h3>
         <span># </span>
         {post.title}
@@ -30,36 +33,15 @@ function TitlePost({ post }: { post: Post }) {
     </Link>
   );
 }
-export function PostDate({ post }: { post: Post }) {
-  return post.publicDate ? (
-    <div className="flex flex-row italic text-center justify-center">
-      <DateRange />
-      <small>
-        <em>{post.publicDate}</em>
-      </small>
-    </div>
-  ) : null;
-}
 
 function Description({ post }: { post: Post }) {
-  return <summary className="aa">{post.metaDescription}</summary>;
+  return <summary className="p-5">{post.metaDescription}</summary>;
 }
-function SnapPostFooter({ post }: { post: Post }) {
-  return (
-    <div className="flex flex-row">
-      <ButtonDetail post={post} />
-      <PostDate post={post} />
-      <Tags post={post} />
-    </div>
-  );
-}
-function ButtonDetail({ post }: { post: Post }) {
-  return (
-    <Link
-      href={`/${post.category.slug}/${post.slug}`}
-      style={{ textDecoration: "none" }}
-    >
-      <Button variant="contained">Xem tiếp</Button>
-    </Link>
-  );
-}
+// function SnapPostFooter({ post }: { post: Post }) {
+//   return (
+//     <div className="flex flex-row space-x-2 mt-2">
+//       <PostDate post={post} />
+//       <Tags post={post} />
+//     </div>
+//   );
+// }

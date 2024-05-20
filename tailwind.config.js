@@ -1,27 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/flowbite-react/lib/**/*.js",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        "brand-blue": "#1DA1F2",
-        "brand-green": "#17BF63",
-        "brand-yellow": "#FFAD1F",
-      },
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            h1: {
-              color: theme("colors.blue.500"),
-              fontWeight: "bold",
-            },
-          },
-        },
-      }),
-    },
+    extend: {},
   },
-  plugins: [require("flowbite/plugin"), require("@tailwindcss/typography")],
+  plugins: [require("flowbite/plugin")],
 };

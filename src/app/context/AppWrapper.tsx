@@ -109,17 +109,7 @@ export const AppWrapper = ({
         categories,
       }}
     >
-      <Box
-        style={{
-          paddingLeft: 20,
-          paddingRight: 20,
-          paddingTop: 20,
-          maxWidth: 1600,
-          margin: "auto",
-        }}
-      >
-        {children}
-      </Box>
+      <div className="container mr-10">{children}</div>
     </AppContext.Provider>
   );
 };

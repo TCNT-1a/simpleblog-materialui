@@ -8,7 +8,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Header from "@/components/header/header";
-import LeftBar from "@/components/leftbard/leftbar";
+import LeftBar from "@/components/leftbar/leftbar";
 import defaultTheme from "../styles/default";
 export default function MainLayout({
   children,
@@ -21,17 +21,32 @@ export default function MainLayout({
 
   console.log("isMobile", isMobile);
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <div className="container">
       <Header></Header>
-      <div className="grid grid"></div>
-      <Grid container>
+      <div className="grid">
+        <LeftBar />
+      </div>
+      <div>{children}</div>
+      {/* <Grid container>
         <Grid item xs={isMobile ? 12 : 3}>
-          <LeftBar />
+          
         </Grid>
         <Grid item xs={isMobile ? 12 : 9}>
           {children}
         </Grid>
-      </Grid>
-    </ThemeProvider>
+      </Grid> */}
+    </div>
+    // <ThemeProvider theme={defaultTheme}>
+    //   <Header></Header>
+    //   <div className="grid grid"></div>
+    //   <Grid container>
+    //     <Grid item xs={isMobile ? 12 : 3}>
+    //       <LeftBar />
+    //     </Grid>
+    //     <Grid item xs={isMobile ? 12 : 9}>
+    //       {children}
+    //     </Grid>
+    //   </Grid>
+    // </ThemeProvider>
   );
 }

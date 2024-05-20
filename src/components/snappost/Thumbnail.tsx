@@ -9,7 +9,20 @@ export function Thumbnail({ post }: { post: Post }) {
     const { url } = post.featureImage;
     path = `${HOST}${url}`;
   } else path = getImage(post.id.toString(), w, h);
-  return <Image alt="post image" width={w} height={h} src={path} />;
+  return (
+    <div
+      className="overflow-hidden"
+      style={{ width: w + "px", height: h + "px" }}
+    >
+      <Image
+        className="rounded-5 p-1"
+        alt="post image"
+        width={w}
+        height={h}
+        src={path}
+      />
+    </div>
+  );
 }
 function getImage(id: string, w: number, h: number) {
   return `https://picsum.photos/${w}/${h}?random=${id}`;

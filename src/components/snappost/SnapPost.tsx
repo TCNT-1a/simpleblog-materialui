@@ -8,12 +8,12 @@ import PostDate from "./PostDate";
 import SnapPostMeta from "./SnapPostMeta";
 export function SnapPost({ post }: { post: Post }) {
   return (
-    <div className="post-snap mb-5">
-      <div className="flex flex-col sm:flex-row ">
+    <div className="post-snap mb-5 ">
+      <div className="flex flex-col sm:flex-row bg-color2">
         <div className="w-12/12 sm:w-4/12">
           <Thumbnail post={post} />
         </div>
-        <div className="flex flex-col bg-color2 w-12/12 sm:w-8/12">
+        <div className="flex flex-col  w-12/12 sm:w-8/12">
           <TitlePost post={post} />
           <Description post={post} />
         </div>
@@ -25,7 +25,7 @@ export function SnapPost({ post }: { post: Post }) {
 
 function TitlePost({ post }: { post: Post }) {
   return (
-    <Link className="pt-5" href={`/${post.category.slug}/${post.slug}`}>
+    <Link className="pt-5 pl-5" href={`/${post.category.slug}/${post.slug}`}>
       <h3>
         <span># </span>
         {post.title}

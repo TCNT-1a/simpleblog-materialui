@@ -33,7 +33,7 @@ export default async function PostPageDetail({ params, searchParams }: Props) {
   else
     return (
       <>
-        <Typography variant="h1"> {post.title}</Typography>
+        <h1>{post.title}</h1>
         <Grid container spacing={2}>
           <Grid item>
             <PostDate post={post}></PostDate>

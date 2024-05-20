@@ -1,72 +1,53 @@
 import { getApi2 } from "@/api-helper";
 import { Chip, Grid, Box, Typography, makeStyles, styled } from "@mui/material";
 import { StyleLink } from "../StyleLink";
-import HandymanIcon from "@mui/icons-material/Handyman";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
+import Link from "next/link";
 
 export default function LeftBar() {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Tags />
-      </Grid>
-      <Grid item xs={12}>
-        <Categories />
-      </Grid>
-    </Grid>
+    <div className="leftbar bg-green-100 p-4">
+      <Tags />
+      <Categories />
+    </div>
   );
 }
 
 async function Tags() {
-  const { data } = await getApi2("api/blog/tags");
-  const tags = data.tags;
-  return (
-    <Block name="Tags">
-      {tags.map((tag: any) => (
-        <Grid item xs={12} key={tag.name}>
-          <StyleLink href={`/tag/${tag.slug}`} passHref>
+  if (!isClientSide()) {
+    const { data } = await getApi2("api/blog/tags");
+    const tags = data.tags;
+    return (
+      <div>
+        <h5>Tags</h5>
+        {tags.map((tag: any) => (
+          <Link key={tag.slug} href={`/tag/${tag.slug}`} passHref>
             <Chip label={`${tag.name} (${tag.count})`} />
-          </StyleLink>
-        </Grid>
-      ))}
-    </Block>
-  );
+          </Link>
+        ))}
+      </div>
+    );
+  }
 }
 
 async function Categories() {
-  const { data } = await getApi2("api/blog/category");
-  const categories = data.categories;
-
-  return (
-    <Block name="Category">
-      {categories.map((category: any) => (
-        <Grid item xs={12} key={category.slug}>
-          <StyleLink href={`/${category.slug}`}>
+  if (!isClientSide()) {
+    const { data } = await getApi2("api/blog/category");
+    const categories = data.categories;
+    return (
+      <div className="flex flex-col">
+        <h5>Categories</h5>
+        {categories.map((category: any) => (
+          <Link key={category.slug} href={`/${category.slug}`}>
             <TouchAppIcon />
             {category.name}
-          </StyleLink>
-        </Grid>
-      ))}
-    </Block>
-  );
+          </Link>
+        ))}
+      </div>
+    );
+  }
 }
 
-function Block({ name, children }: { name: string; children: any }) {
-  return (
-    <Grid
-      container
-      spacing={1}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        textAlign: "left",
-        color: "#000",
-      }}
-    >
-      <Grid item xs={12}>
-        <Typography variant="h5">{name}</Typography>
-      </Grid>
-      {children}
-    </Grid>
-  );
+export function isClientSide() {
+  return typeof window !== "undefined";
 }

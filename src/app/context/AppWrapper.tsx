@@ -31,7 +31,7 @@ export const AppWrapper = ({
   children: ReactNode;
 }) => {
   const router = useRouter();
-  console.log(categories);
+
   const handleLogin = () => {
     navigate("/login");
   };
@@ -97,7 +97,7 @@ export const AppWrapper = ({
   function setMenuLogout() {
     setMenuItem(logoutState());
   }
-  // console.log(activeMenu);
+
   return (
     <AppContext.Provider
       value={{
@@ -109,7 +109,7 @@ export const AppWrapper = ({
         categories,
       }}
     >
-      <div className="container mr-10">{children}</div>
+      <div className="app-wrapper">{children}</div>
     </AppContext.Provider>
   );
 };

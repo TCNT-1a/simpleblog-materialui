@@ -6,7 +6,7 @@ export default function ListPost({ posts }: { posts: any[] }) {
   return (
     <>
       {posts.map((post: any) => (
-        <SnapPost key={post.id} post={post}></SnapPost>
+        <SnapPost key={post.slug} post={post}></SnapPost>
       ))}
     </>
   );

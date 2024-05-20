@@ -3,12 +3,11 @@ import { Post } from "./types";
 import Image from "next/image";
 export function Thumbnail(post: Post) {
   let path: string;
-  const w = 300;
-  const h = 188;
+  const w = 400;
+  const h = 300;
   if (post.featureImage) {
     const { url } = post.featureImage;
     path = `${HOST}${url}`;
-    console.log("path", path);
   } else path = getImage(post.id.toString(), w, h);
   return <Image alt="post image" width={w} height={h} src={path} />;
 }

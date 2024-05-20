@@ -11,9 +11,5 @@ export default async function PostPage({
   const { data } = await getApi2(`api/blog/post?category=${params.category}`);
   const { posts } = data;
 
-  return (
-    <div className="w">
-      <ListPost posts={posts}></ListPost>
-    </div>
-  );
+  return <ListPost posts={posts}></ListPost>;
 }

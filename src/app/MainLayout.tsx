@@ -1,52 +1,21 @@
-"use client";
 import React from "react";
-import {
-  Grid,
-  Box,
-  ThemeProvider,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
 import Header from "@/components/header/header";
 import LeftBar from "@/components/leftbar/leftbar";
-import defaultTheme from "../styles/default";
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const theme = useTheme();
-
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  console.log("isMobile", isMobile);
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <Header></Header>
-      <div className="grid">
-        <LeftBar />
+      <div className="flex flex-col sm:flex-row">
+        <div className="w-12/12 sm:w-3/12">
+          <LeftBar />
+        </div>
+
+        <div className="w-12/12 sm:w-9/12">{children}</div>
       </div>
-      <div>{children}</div>
-      {/* <Grid container>
-        <Grid item xs={isMobile ? 12 : 3}>
-          
-        </Grid>
-        <Grid item xs={isMobile ? 12 : 9}>
-          {children}
-        </Grid>
-      </Grid> */}
     </div>
-    // <ThemeProvider theme={defaultTheme}>
-    //   <Header></Header>
-    //   <div className="grid grid"></div>
-    //   <Grid container>
-    //     <Grid item xs={isMobile ? 12 : 3}>
-    //       <LeftBar />
-    //     </Grid>
-    //     <Grid item xs={isMobile ? 12 : 9}>
-    //       {children}
-    //     </Grid>
-    //   </Grid>
-    // </ThemeProvider>
   );
 }

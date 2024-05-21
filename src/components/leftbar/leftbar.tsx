@@ -24,9 +24,13 @@ async function Tags() {
     return (
       <div>
         <h5 className="mb-5">Tags</h5>
-        <div className={"flex flex-row " + classesBlockChild}>
+        <div className={"flex flex-row flex-wrap " + classesBlockChild}>
           {tags.map((tag: any) => (
-            <Badge color="red" key={tag.slug} className="w-fit mt-1 mr-2">
+            <Badge
+              color="red"
+              key={tag.slug}
+              className="w-fit mt-1 mr-2 min-w-fit"
+            >
               <Link href={`/tag/${tag.slug}`} className="hover:bg-bg-hover">
                 {`${tag.name} (${tag.count})`}
               </Link>

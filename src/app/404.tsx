@@ -1,5 +1,3 @@
-import { Box, Typography } from "@mui/material";
-
 export default function Custom404() {
   return (
     <div>

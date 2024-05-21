@@ -3,8 +3,8 @@ import { Post } from "./types";
 import Image from "next/image";
 export function Thumbnail({ post }: { post: Post }) {
   let path: string;
-  const w = 400;
-  const h = 300;
+  const w = 300;
+  const h = 188;
   if (post.featureImage) {
     const { url } = post.featureImage;
     path = `${HOST}${url}`;

@@ -1,14 +1,27 @@
+import Link from "next/link";
 import logo from "./logo.jpg";
 import Image from "next/image";
 export default function Brand({ branchName }: { branchName: string }) {
   return (
-    <div className="flex flex-col sm:flex-row ">
-      <figure className="w-fit">
-        <Image src={logo} alt="logo" width={30} height={30} />
-      </figure>
-      <div className="w-fit">
-        <h1>{branchName}</h1>
-      </div>
+    <div className="bg-primary p-2">
+      <Link href="/" className="flex flex-row items-center space-x-2">
+        <Logo></Logo>
+        <h1 className="bg-primary text-white font-bold">{branchName}</h1>
+      </Link>
+    </div>
+  );
+}
+
+function Logo() {
+  return (
+    <div className="w-fit h-fit">
+      <Image
+        src={logo}
+        alt="logo"
+        width={30}
+        height={30}
+        className="rounded-full"
+      />
     </div>
   );
 }

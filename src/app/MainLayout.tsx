@@ -2,6 +2,7 @@ import React from "react";
 import Header from "@/components/header/header";
 import LeftBar from "@/components/leftbar/leftbar";
 import { classesBlock } from "@/styles/styles";
+import Footer from "@/components/footer/footer";
 export default function MainLayout({
   children,
 }: {
@@ -20,6 +21,7 @@ export default function MainLayout({
           <div className={"min-h-100vh "}>{children}</div>
         </div>
       </div>
+      {/* <Footer></Footer> */}
     </div>
   );
 }

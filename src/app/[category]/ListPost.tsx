@@ -5,8 +5,8 @@ export default function ListPost({ posts }: { posts: any[] }) {
   if (posts.length == 0) return <Custom404></Custom404>;
   return (
     <>
-      {posts.map((post: any) => (
-        <SnapPost key={post.slug} post={post}></SnapPost>
+      {posts.map((post: any, i) => (
+        <SnapPost key={i} post={post}></SnapPost>
       ))}
     </>
   );

@@ -1,20 +1,19 @@
 import { getApi2 } from "@/api-helper";
-import { Grid, Box, Typography, makeStyles, styled } from "@mui/material";
-import { StyleLink } from "../StyleLink";
-import TouchAppIcon from "@mui/icons-material/TouchApp";
+
 import Link from "next/link";
 import { Badge } from "flowbite-react";
+import { classesBlockChild } from "@/styles/styles";
 
 export default function LeftBar() {
   return (
-    <div className="leftbar p-4">
+    <>
       <div>
         <Tags />
       </div>
       <div className="mt-4">
         <Categories />
       </div>
-    </div>
+    </>
   );
 }
 
@@ -24,11 +23,11 @@ async function Tags() {
     const tags = data.tags;
     return (
       <div>
-        <h5>Tags</h5>
-        <div className="flex flex-row">
+        <h5 className="mb-5">Tags</h5>
+        <div className={"flex flex-row " + classesBlockChild}>
           {tags.map((tag: any) => (
             <Badge color="red" key={tag.slug} className="w-fit mt-1 mr-2">
-              <Link href={`/tag/${tag.slug}`}>
+              <Link href={`/tag/${tag.slug}`} className="hover:bg-bg-hover">
                 {`${tag.name} (${tag.count})`}
               </Link>
             </Badge>
@@ -44,12 +43,16 @@ async function Categories() {
     const { data } = await getApi2("api/blog/category");
     const categories = data.categories;
     return (
-      <div className="flex flex-col">
-        <h5>Categories</h5>
+      <div className={"flex flex-col " + classesBlockChild}>
+        <h5 className="mb-5">Categories</h5>
         {categories.map((category: any) => (
-          <Link key={category.slug} href={`/${category.slug}`}>
-            <TouchAppIcon />
-            {category.name}
+          <Link
+            key={category.slug}
+            href={`/${category.slug}`}
+            className="rounded-lg bg-bg hover:bg-bg-hover p-4 mb-2 flex flex-row"
+          >
+            <div className="rounded-full w-6 h-6 bg-primary mr-2"></div>
+            <div>{category.name}</div>
           </Link>
         ))}
       </div>

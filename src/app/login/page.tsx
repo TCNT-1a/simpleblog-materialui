@@ -1,29 +1,26 @@
-"use client";
-import { Button, Grid, MenuItem, TextField } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useAppContext } from "../context/AppWrapper";
+import { Button, TextInput } from "flowbite-react";
 
 export default function LoginPage() {
-  const router = useRouter();
-  const { setMenuLogin } = useAppContext();
-  function handleLogin() {
-    setMenuLogin();
-    router.push("/");
-  }
   return (
-    <Grid container spacing={1} display={"flex"} textAlign={"center"}>
-      <Grid item xs={12}>
-        <h1>Login</h1>
-      </Grid>
-      <Grid item xs={12}>
-        <TextField placeholder="Username" type="text" />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField placeholder="Password" type="password" />
-      </Grid>
-      <Grid item xs={12}>
-        <Button onClick={handleLogin}>Login</Button>
-      </Grid>
-    </Grid>
+    <div className="container mx-auto  flex flex-col">
+      <div className="w-150 mx-auto text-center space-y-2 mt-20">
+        <h1 className="bg-black">Login</h1>
+        <TextInput
+          id="email"
+          type="email"
+          placeholder="name@flowbite.com"
+          required
+        />
+        <TextInput
+          id="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <div className="flex justify-center">
+          <Button color={"blue"}>Login</Button>
+        </div>
+      </div>
+    </div>
   );
 }

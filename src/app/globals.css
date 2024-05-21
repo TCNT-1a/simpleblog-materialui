@@ -11,6 +11,33 @@
     --color3: #211551;
     --color4: #AFD198;
 }
+
+.theme-default {
+    --color-primary: #faae13;
+    --color-secondary: #fe803b;
+    --color-text-primary: #333;
+    --color-text-secondary: #898a8d;
+    --color-text-third: #2192ff;
+    --color-text-fourth: #47b5ff;
+    --color-bg: #fff;
+    --color-bg-primary: #f5f6fa;
+    --color-bg-secondary: #E8EFCF;
+    --color-bg-icon: #e4e6eb;
+    --color-bg-hover: #fcfbdc;
+    --color-error: #e61414;
+    --color-shadow: #0f172a;
+    --color-line: #ddd;
+    --color-fur: #ffb141;
+    --color-fur-dark: #f5832c;
+    --color-spot: #f9584c;
+    --color-snout: #544258;
+    --color-collar: #3eab6c;
+    --duration: .7s;
+    --semi-duration: calc(var(--duration)/2);
+    --easing: cubic-bezier(.5,0,.5,1);
+    --stagger: calc(var(--semi-duration)*-1/2)
+}
+
 .color1 {
     color: var(--color1);
 }
@@ -35,6 +62,10 @@
 .bg-color4 {
     background-color: var(--color4);
 }
+
+
+
+
 
 
 h1 {
@@ -62,6 +93,7 @@ h4 {
 
 h5 {
     font-size: 1.3rem;
+    font-weight: bold;
 }
 
 h6 {
@@ -76,3 +108,4 @@ h6 {
 .body2 {
     font-size: 1rem;
 }
+

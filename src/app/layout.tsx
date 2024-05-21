@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppWrapper } from "./context/AppWrapper";
 import { getApi2 } from "@/api-helper";
+import { THEME_DEFAULT } from "@/path.config";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default async function RootLayout({
   const categories = data.categories;
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={THEME_DEFAULT + " bg-bg-primary"}>
         <AppWrapper categories={categories}>{children}</AppWrapper>
       </body>
     </html>

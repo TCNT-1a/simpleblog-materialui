@@ -6,10 +6,11 @@ import { Post } from "./types";
 import { Button } from "flowbite-react";
 import PostDate from "./PostDate";
 import SnapPostMeta from "./SnapPostMeta";
+import { classesBlock, classesBlockChild } from "@/styles/styles";
 export function SnapPost({ post }: { post: Post }) {
   return (
-    <div className="post-snap mb-5 ">
-      <div className="flex flex-col sm:flex-row bg-color2">
+    <div className={"post-snap mb-10" + classesBlock}>
+      <div className="flex flex-col sm:flex-row bg-bg-secondary p-1">
         <div className="w-12/12 sm:w-4/12">
           <Thumbnail post={post} />
         </div>
@@ -37,11 +38,3 @@ function TitlePost({ post }: { post: Post }) {
 function Description({ post }: { post: Post }) {
   return <summary className="p-5">{post.metaDescription}</summary>;
 }
-// function SnapPostFooter({ post }: { post: Post }) {
-//   return (
-//     <div className="flex flex-row space-x-2 mt-2">
-//       <PostDate post={post} />
-//       <Tags post={post} />
-//     </div>
-//   );
-// }

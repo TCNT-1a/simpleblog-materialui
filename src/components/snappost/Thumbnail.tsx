@@ -11,11 +11,11 @@ export function Thumbnail({ post }: { post: Post }) {
   } else path = getImage(post.id.toString(), w, h);
   return (
     <div
-      className="overflow-hidden"
+      className="overflow-hidden p-1 rounded-lg "
       style={{ width: w + "px", height: h + "px" }}
     >
       <Image
-        className="rounded-5 p-1"
+        className="rounded-5"
         alt="post image"
         width={w}
         height={h}

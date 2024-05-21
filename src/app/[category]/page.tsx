@@ -1,7 +1,24 @@
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { layout_styles } from "./style";
 import { getApi2 } from "@/api-helper";
+
+type Props = {
+  params: { category: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { data } = await getApi2(`api/blog/post?category=${params.category}`);
+  const { category } = data;
+  if (category == null) return { title: "404 Not Found" };
+  return {
+    title: category.name,
+    description: category.metaDescription,
+  };
+}
 
 export default async function PostPage({
   params,

@@ -2,11 +2,11 @@
 
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import svg from "./ethereum.svg";
-import { classesBlockChild } from "@/styles/styles";
+import svg from "./ethereum-eth.svg";
 
-export default function BTCPrice() {
+import CoinPrice from "../CoinPrice";
+
+export default function ETHPrice() {
   const [price, setPrice] = useState("");
   //   const [lastFetch, setLastFetch] = useState("");
   const urlapi = "https://api.coinbase.com/v2/prices/ETH-USD/spot";
@@ -17,7 +17,6 @@ export default function BTCPrice() {
         .then((data) => {
           console.log(data);
           setPrice(data.data.amount);
-          //   setLastFetch(data.time.updated);
         });
     };
     fetchData();
@@ -26,22 +25,6 @@ export default function BTCPrice() {
   }, []);
 
   return (
-    <>
-      <div className={classesBlockChild + "flex flex-col w-[120px] m-5"}>
-        <div>
-          <Image
-            src={svg}
-            alt="logo"
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
-          <em className="color-white">
-            ETH Price: <b>{price}$</b>
-          </em>
-        </div>
-        {/* <small>{lastFetch}</small> */}
-      </div>
-    </>
+    <CoinPrice name="BTC price" svg={svg} price={parseFloat(price)}></CoinPrice>
   );
 }

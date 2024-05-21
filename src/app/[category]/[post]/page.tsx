@@ -45,14 +45,20 @@ export default async function PostPageDetail({ params, searchParams }: Props) {
 }
 
 function AvatarUser({ author }: { author: any }) {
+  let url;
   const urldefault =
     "https://flowbite.com/docs/images/people/profile-picture-1.jpg";
-  let url = author.avatar.url ? author.avatar.url : urldefault;
+  if (!author) url = urldefault;
+  else url = author.avatar.url ? author.avatar.url : urldefault;
   const path = HOST + url;
-  console.log(path);
   return (
-    <div className="flex flex-wrap gap-2">
-      <Avatar img={path} alt="avatar of Jese" rounded />
+    <div className="flex flex-wrap gap-2 items-center">
+      {author ? (
+        <>
+          <Avatar img={path} alt={author.name} rounded bordered />
+          <em>{author.name}</em>
+        </>
+      ) : null}
     </div>
   );
 }

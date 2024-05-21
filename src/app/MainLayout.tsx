@@ -1,8 +1,10 @@
 import React from "react";
 import Header from "@/components/header/header";
 import LeftBar from "@/components/leftbar/leftbar";
-import { classesBlock } from "@/styles/styles";
+import { classesBlock, classesBlockChild } from "@/styles/styles";
 import Footer from "@/components/footer/footer";
+import BTCPrice from "@/components/coinprice/BTC/BTCPrice";
+import ETHPrice from "@/components/coinprice/ETH/ETHPrice";
 export default function MainLayout({
   children,
 }: {
@@ -17,11 +19,21 @@ export default function MainLayout({
             <LeftBar />
           </div>
         </div>
-        <div className="w-12/12 sm:w-9/12 pt-4">
-          <div className={"min-h-100vh "}>{children}</div>
+        <div className="w-12/12 sm:w-9/12 pt-4 flex flex-col sm:flex-row ">
+          <div className={"flex flex-col w-12/12 sm:w-10/12"}>{children}</div>
+          <div
+            className={
+              "flex flex-col w-12/12 sm:w-2/12 space-y-2 ml-3 " + classesBlock
+            }
+          >
+            <div className={classesBlockChild + " m-3"}>
+              <h5 className="m-3">Thị trường</h5>
+              <BTCPrice></BTCPrice>
+              <ETHPrice></ETHPrice>
+            </div>
+          </div>
         </div>
       </div>
-      {/* <Footer></Footer> */}
     </div>
   );
 }

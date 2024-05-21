@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import svg from "./bitcoin-btc-logo.svg";
-import { classesBlockChild } from "@/styles/styles";
+import { classesBlock, classesBlockChild } from "@/styles/styles";
+import CoinPrice from "../CoinPrice";
 
 export default function BTCPrice() {
   const [price, setPrice] = useState(0);
-  const [lastFetch, setLastFetch] = useState("");
+
   const urlapi = "https://api.coindesk.com/v1/bpi/currentprice.json";
   useEffect(() => {
     const fetchData = () => {
@@ -14,7 +15,6 @@ export default function BTCPrice() {
         .then((res) => res.json())
         .then((data) => {
           setPrice(data.bpi.USD.rate_float);
-          setLastFetch(data.time.updated);
         });
     };
     fetchData();
@@ -22,23 +22,5 @@ export default function BTCPrice() {
     return () => clearInterval(intervalId);
   }, []);
 
-  return (
-    <>
-      <div className={classesBlockChild + "flex flex-col w-[120px] m-5"}>
-        <div>
-          <Image
-            src={svg}
-            alt="logo"
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
-          <em className="color-white">
-            BTC Price: <b>{price}$</b>
-          </em>
-        </div>
-        <small>{lastFetch}</small>
-      </div>
-    </>
-  );
+  return <CoinPrice name="BTC price" svg={svg} price={price}></CoinPrice>;
 }

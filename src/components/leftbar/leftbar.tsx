@@ -22,9 +22,9 @@ async function Tags() {
     const { data } = await getApi2("api/blog/tags");
     const tags = data.tags;
     return (
-      <div>
+      <div className={classesBlockChild}>
         <h5 className="mb-5">Tags</h5>
-        <div className={"flex flex-row flex-wrap " + classesBlockChild}>
+        <div className={"flex flex-row flex-wrap "}>
           {tags.map((tag: any) => (
             <Badge
               color="red"

@@ -1,6 +1,6 @@
 import { getApi2 } from "@/api-helper";
 import MainLayout from "@/app/MainLayout";
-import ListPost from "@/app/[category]/ListPost";
+import ListPost from "@/components/ListPost/ListPost";
 
 type Props = {
   params: { tag: string };

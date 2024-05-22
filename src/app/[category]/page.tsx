@@ -29,12 +29,13 @@ export default async function PostPage({
   searchParams: any;
 }) {
   const { page, limit } = searchParams;
+
   const numLimit = parseInt(limit as string) || 3;
-  const { data } = await getApi2(
-    `api/blog/post?category=${params.category}&page=${page}&limit=${
-      numLimit + 1
-    }`
-  );
+  const apiPath = `api/blog/post?category=${params.category}`;
+  const q = page ? `&page=${page}&limit=${numLimit + 1}` : "";
+  const t = `${apiPath}${q}`;
+  console.log(t);
+  const { data } = await getApi2(t);
   const { posts } = data;
   let next = false;
   let previous = false;
@@ -45,7 +46,7 @@ export default async function PostPage({
     previous = true;
   }
   posts.pop();
-  const path = `${HOST_FE}${params.category}`;
+  const path = `${HOST_FE}/${params.category}`;
   console.log(path);
   return (
     <ListPost posts={posts}>

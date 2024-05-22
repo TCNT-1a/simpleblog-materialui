@@ -21,3 +21,14 @@ export async function getApi2(path: string) {
   const data = await res.json();
   return data;
 }
+
+export async function getPageInfo(): Promise<PageInfor> {
+  const { data } = await getApi2(`api/page-info`);
+  const { attributes } = data;
+  const { branchName, metaHomePage } = attributes;
+  return { branchName, metaHomePage };
+}
+type PageInfor = {
+  branchName: string;
+  metaHomePage: string;
+};

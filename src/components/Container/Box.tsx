@@ -1,6 +1,3 @@
-// export const classesBlock = `bg-bg rounded-lg p-3`;
-// export const classesBlockChild = "bg-bg-primary p-3 rounded-lg";
-
 export function GrayBox({
   children,
   title,

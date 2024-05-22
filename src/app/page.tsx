@@ -1,25 +1,16 @@
-import { getApi2 } from "@/config/api-helper";
+import { getApi2, getPageInfo } from "@/config/api-helper";
 import MainLayout from "./MainLayout";
 import ListPost from "@/components/ListPost/ListPost";
 import { LoadMore } from "@/components/ListPost/LoadMore";
-import { Metadata, ResolvingMetadata } from "next";
-import { BRANCH_NAME } from "@/config/app.config";
+import { generateMetadata_Object } from "@/config/metadata.helper";
 
-type Props = {
-  params: { category: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { data } = await getApi2(`api/blog/post?category=${params.category}`);
-  const { category } = data;
-  if (category == null) return { title: "404 Not Found" };
-  return {
-    title: BRANCH_NAME + " - " + category.name,
-    description: BRANCH_NAME + " - " + category.metaDescription,
-  };
+export async function generateMetadata() {
+  const pageInfor = await getPageInfo();
+  return generateMetadata_Object(
+    pageInfor.branchName,
+    pageInfor.metaHomePage,
+    false
+  );
 }
 
 export default async function Home() {

@@ -3,7 +3,7 @@ import logo from "./logo.jpg";
 import Image from "next/image";
 export default function Brand({ branchName }: { branchName: string }) {
   return (
-    <div className="bg-primary p-2">
+    <div className=" p-2">
       <Link href="/" className="flex flex-row items-center space-x-2">
         <Logo></Logo>
         <h1 className="bg-primary text-white font-bold">{branchName}</h1>

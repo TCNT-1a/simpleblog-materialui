@@ -3,7 +3,7 @@ import { NumberOfView } from "@/components/NumberOfView";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 import type { Metadata, ResolvingMetadata } from "next";
-import Custom404 from "../../404";
+import Custom404 from "../../404/404";
 import PostDate from "@/components/snappost/PostDate";
 import { Avatar } from "flowbite-react";
 import { HOST } from "@/config/app.config";

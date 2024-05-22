@@ -1,6 +1,7 @@
 import { getApi2 } from "@/config/api-helper";
 import MainLayout from "@/app/MainLayout";
 import ListPost from "@/components/ListPost/ListPost";
+import { LoadMore } from "@/components/ListPost/LoadMore";
 
 type Props = {
   params: { tag: string };
@@ -14,7 +15,9 @@ export default async function TagPage({ params, searchParams }: Props) {
 
   return (
     <MainLayout>
-      <ListPost posts={posts}></ListPost>
+      <ListPost posts={posts}>
+        <LoadMore />
+      </ListPost>
     </MainLayout>
   );
 }

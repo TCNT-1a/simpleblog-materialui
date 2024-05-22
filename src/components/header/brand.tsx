@@ -6,7 +6,7 @@ export default function Brand({ branchName }: { branchName: string }) {
     <div className=" p-2">
       <Link href="/" className="flex flex-row items-center space-x-2">
         <Logo></Logo>
-        <h1 className="bg-primary text-white font-bold">{branchName}</h1>
+        <h1 className="bg-primary text-gray-100 font-bold">{branchName}</h1>
       </Link>
     </div>
   );

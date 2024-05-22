@@ -1,17 +1,13 @@
 import React from "react";
 import Header from "@/components/header/header";
 import LeftBar from "@/components/leftbar/leftbar";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookSquare,
-  faTelegramPlane,
-} from "@fortawesome/free-brands-svg-icons";
-
 import BTCPrice from "@/components/coinprice/BTC/BTCPrice";
 import ETHPrice from "@/components/coinprice/ETH/ETHPrice";
 import Link from "next/link";
 import { GrayBox, WhiteBox } from "@/components/Container/Box";
+import { SOCIALS } from "@/config/app.config";
+import Footer from "@/components/footer/footer";
 export default function MainLayout({
   children,
 }: {
@@ -31,6 +27,7 @@ export default function MainLayout({
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
@@ -39,16 +36,16 @@ function RightBar() {
   return (
     <WhiteBox>
       <GrayBox title="Contact Us">
-        <AweSomeIcon
-          href="https://www.facebook.com"
-          icon={faFacebookSquare}
-          title="Facebook"
-        ></AweSomeIcon>
-        <AweSomeIcon
-          href="https://t.me/your_telegram_channel"
-          icon={faTelegramPlane}
-          title="Telegram"
-        ></AweSomeIcon>
+        {SOCIALS.map((social, i) => {
+          return (
+            <AweSomeIcon
+              key={i}
+              href={social.href}
+              icon={social.icon}
+              title={social.title}
+            ></AweSomeIcon>
+          );
+        })}
       </GrayBox>
 
       <GrayBox title="Thị trường">

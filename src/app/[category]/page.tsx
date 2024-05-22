@@ -1,6 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
+import { LoadMore } from "@/components/ListPost/LoadMore";
 
 type Props = {
   params: { category: string };
@@ -27,5 +28,9 @@ export default async function PostPage({
   const { data } = await getApi2(`api/blog/post?category=${params.category}`);
   const { posts } = data;
 
-  return <ListPost posts={posts}></ListPost>;
+  return (
+    <ListPost posts={posts}>
+      <LoadMore></LoadMore>
+    </ListPost>
+  );
 }

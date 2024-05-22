@@ -44,12 +44,8 @@ async function Categories() {
     return (
       <GrayBox title="Categories">
         {categories.map((category: any, i: number) => (
-          <WhiteBox hoverable={true}>
-            <Link
-              key={i}
-              href={`/${category.slug}`}
-              className="p-1 flex flex-row"
-            >
+          <WhiteBox hoverable={true} key={i}>
+            <Link href={`/${category.slug}`} className="p-1 flex flex-row">
               <div className="rounded-full w-6 h-6 bg-primary mr-2"></div>
               <div>{category.name}</div>
             </Link>

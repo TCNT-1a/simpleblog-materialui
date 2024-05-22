@@ -6,8 +6,10 @@ import BTCPrice from "@/components/coinprice/BTC/BTCPrice";
 import ETHPrice from "@/components/coinprice/ETH/ETHPrice";
 import Link from "next/link";
 import { GrayBox, WhiteBox } from "@/components/Container/Box";
-import { SOCIALS } from "@/config/app.config";
+import { SOCIALS_DEFAULT } from "@/config/app.config";
 import Footer from "@/components/footer/footer";
+import { getPageInfo } from "@/config/api-helper";
+import { FormatSocialIcon } from "@/config/social-helper";
 export default function MainLayout({
   children,
 }: {
@@ -32,11 +34,13 @@ export default function MainLayout({
   );
 }
 
-function RightBar() {
+async function RightBar() {
+  const pageInfor = await getPageInfo();
+  const socials = FormatSocialIcon(pageInfor.contacts) || SOCIALS_DEFAULT;
   return (
     <WhiteBox>
       <GrayBox title="Contact Us">
-        {SOCIALS.map((social, i) => {
+        {socials.map((social, i) => {
           return (
             <AweSomeIcon
               key={i}

@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import svg from "./bitcoin-btc-logo.svg";
-import { classesBlock, classesBlockChild } from "@/styles/styles";
 import CoinPrice from "../CoinPrice";
 
 export default function BTCPrice() {

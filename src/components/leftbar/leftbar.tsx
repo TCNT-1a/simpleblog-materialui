@@ -24,12 +24,8 @@ async function Tags() {
     return (
       <GrayBox title="Tags">
         <div className={"flex flex-row flex-wrap "}>
-          {tags.map((tag: any) => (
-            <Badge
-              color="red"
-              key={tag.slug}
-              className="w-fit mt-1 mr-2 min-w-fit"
-            >
+          {tags.map((tag: any, i: number) => (
+            <Badge color="red" key={i} className="w-fit mt-1 mr-2 min-w-fit">
               <Link href={`/tag/${tag.slug}`} className="hover:bg-bg-hover">
                 {`${tag.name} (${tag.count})`}
               </Link>
@@ -47,10 +43,10 @@ async function Categories() {
     const categories = data.categories;
     return (
       <GrayBox title="Categories">
-        {categories.map((category: any) => (
+        {categories.map((category: any, i: number) => (
           <WhiteBox hoverable={true}>
             <Link
-              key={category.slug}
+              key={i}
               href={`/${category.slug}`}
               className="p-1 flex flex-row"
             >

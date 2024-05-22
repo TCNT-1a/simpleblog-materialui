@@ -12,7 +12,7 @@ export default function ListPost({
   if (posts.length == 0) return <Custom404></Custom404>;
   return (
     <div className="flex flex-col flex-wrap space-y-3 mb-5">
-      {posts.map((post: any, i) => (
+      {posts.map((post: any, i: number) => (
         <SnapPost key={i} post={post}></SnapPost>
       ))}
       <div>{children}</div>

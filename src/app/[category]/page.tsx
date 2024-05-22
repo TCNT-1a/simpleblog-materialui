@@ -2,6 +2,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
 import { LoadMore } from "@/components/ListPost/LoadMore";
+import { BRANCH_NAME } from "@/config/app.config";
 
 type Props = {
   params: { category: string };
@@ -15,8 +16,8 @@ export async function generateMetadata(
   const { category } = data;
   if (category == null) return { title: "404 Not Found" };
   return {
-    title: category.name,
-    description: category.metaDescription,
+    title: BRANCH_NAME + " - " + category.name,
+    description: BRANCH_NAME + " - " + category.metaDescription,
   };
 }
 

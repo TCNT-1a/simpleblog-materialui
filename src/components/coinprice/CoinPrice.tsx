@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { classesBlockChild } from "@/styles/styles";
+import { WhiteBox } from "../Container/Box";
 
 export default function CoinPrice({
   name,
@@ -13,7 +13,7 @@ export default function CoinPrice({
 }) {
   return (
     <>
-      <div className={classesBlockChild + " flex flex-col m-2"}>
+      <WhiteBox hoverable={true}>
         <div>
           <Image
             src={svg}
@@ -26,7 +26,7 @@ export default function CoinPrice({
             {name}: <b>{Math.round(price)}$</b>
           </em>
         </div>
-      </div>
+      </WhiteBox>
     </>
   );
 }

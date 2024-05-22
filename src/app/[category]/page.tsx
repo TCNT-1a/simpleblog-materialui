@@ -1,7 +1,6 @@
 import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
-import { layout_styles } from "./style";
-import { getApi2 } from "@/api-helper";
+import { getApi2 } from "@/config/api-helper";
 
 type Props = {
   params: { category: string };

@@ -1,19 +1,19 @@
-import { getApi2 } from "@/api-helper";
+import { getApi2 } from "@/config/api-helper";
 
 import Link from "next/link";
 import { Badge } from "flowbite-react";
-import { classesBlockChild } from "@/styles/styles";
+import { GrayBox, WhiteBox } from "../Container/Box";
 
 export default function LeftBar() {
   return (
-    <>
+    <WhiteBox>
       <div>
         <Tags />
       </div>
-      <div className="mt-4">
+      <div>
         <Categories />
       </div>
-    </>
+    </WhiteBox>
   );
 }
 
@@ -22,8 +22,7 @@ async function Tags() {
     const { data } = await getApi2("api/blog/tags");
     const tags = data.tags;
     return (
-      <div className={classesBlockChild}>
-        <h5 className="mb-5">Tags</h5>
+      <GrayBox title="Tags">
         <div className={"flex flex-row flex-wrap "}>
           {tags.map((tag: any) => (
             <Badge
@@ -37,7 +36,7 @@ async function Tags() {
             </Badge>
           ))}
         </div>
-      </div>
+      </GrayBox>
     );
   }
 }
@@ -47,19 +46,20 @@ async function Categories() {
     const { data } = await getApi2("api/blog/category");
     const categories = data.categories;
     return (
-      <div className={"flex flex-col " + classesBlockChild}>
-        <h5 className="mb-5">Categories</h5>
+      <GrayBox title="Categories">
         {categories.map((category: any) => (
-          <Link
-            key={category.slug}
-            href={`/${category.slug}`}
-            className="rounded-lg bg-bg hover:bg-bg-hover p-4 mb-2 flex flex-row"
-          >
-            <div className="rounded-full w-6 h-6 bg-primary mr-2"></div>
-            <div>{category.name}</div>
-          </Link>
+          <WhiteBox hoverable={true}>
+            <Link
+              key={category.slug}
+              href={`/${category.slug}`}
+              className="p-1 flex flex-row"
+            >
+              <div className="rounded-full w-6 h-6 bg-primary mr-2"></div>
+              <div>{category.name}</div>
+            </Link>
+          </WhiteBox>
         ))}
-      </div>
+      </GrayBox>
     );
   }
 }

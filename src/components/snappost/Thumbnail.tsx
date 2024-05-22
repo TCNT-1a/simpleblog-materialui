@@ -1,4 +1,4 @@
-import { HOST } from "@/path.config";
+import { HOST } from "@/config/app.config";
 import { Post } from "./types";
 import Image from "next/image";
 export function Thumbnail({ post }: { post: Post }) {

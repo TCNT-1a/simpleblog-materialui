@@ -1,9 +1,14 @@
+import { getApi2 } from "@/config/api-helper";
 import MainLayout from "./MainLayout";
+import ListPost from "@/components/ListPost/ListPost";
 
-export default function Home() {
+export default async function Home() {
+  const { data } = await getApi2(`api/blog/post`);
+  const { posts } = data;
   return (
     <MainLayout>
-      <h1>Home</h1>
+      <h2>Bài viết mới nhất</h2>
+      <ListPost posts={posts}></ListPost>
     </MainLayout>
   );
 }

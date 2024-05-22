@@ -1,4 +1,4 @@
-import { getApi2 } from "@/api-helper";
+import { getApi2 } from "@/config/api-helper";
 import { NumberOfView } from "@/components/NumberOfView";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
@@ -6,7 +6,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import Custom404 from "../../404";
 import PostDate from "@/components/snappost/PostDate";
 import { Avatar } from "flowbite-react";
-import { HOST } from "@/path.config";
+import { HOST } from "@/config/app.config";
 type Props = {
   params: { post: string };
   searchParams: { [key: string]: string | string[] | undefined };

@@ -1,4 +1,4 @@
-import { getApi2 } from "@/api-helper";
+import { getApi2 } from "@/config/api-helper";
 import MainLayout from "@/app/MainLayout";
 import ListPost from "@/components/ListPost/ListPost";
 

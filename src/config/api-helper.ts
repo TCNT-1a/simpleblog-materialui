@@ -1,8 +1,8 @@
 // api.js
 import axios from "axios";
 import Cookies from "js-cookie";
-import { backend_api } from "../api.config";
-import { HOST } from "./path.config";
+import { backend_api } from "../../api.config";
+import { HOST } from "./app.config";
 
 export function getApi() {
   const token = Cookies.get("token");

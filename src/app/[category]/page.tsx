@@ -2,7 +2,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
 import { LoadMore } from "@/components/ListPost/LoadMore";
-import { BRANCH_NAME } from "@/config/app.config";
+import { BRANCH_NAME, HOST_FE } from "@/config/app.config";
 
 type Props = {
   params: { category: string };
@@ -23,15 +23,39 @@ export async function generateMetadata(
 
 export default async function PostPage({
   params,
+  searchParams,
 }: {
   params: { category: string };
+  searchParams: any;
 }) {
-  const { data } = await getApi2(`api/blog/post?category=${params.category}`);
+  const { page, limit } = searchParams;
+  const numLimit = parseInt(limit as string) || 3;
+  const { data } = await getApi2(
+    `api/blog/post?category=${params.category}&page=${page}&limit=${
+      numLimit + 1
+    }`
+  );
   const { posts } = data;
-
+  let next = false;
+  let previous = false;
+  if (posts.length > numLimit) {
+    next = true;
+  }
+  if (page > 1) {
+    previous = true;
+  }
+  posts.pop();
+  const path = `${HOST_FE}${params.category}`;
+  console.log(path);
   return (
     <ListPost posts={posts}>
-      <LoadMore></LoadMore>
+      <LoadMore
+        path={path}
+        page={page}
+        limit={numLimit}
+        next={next}
+        previous={previous}
+      ></LoadMore>
     </ListPost>
   );
 }

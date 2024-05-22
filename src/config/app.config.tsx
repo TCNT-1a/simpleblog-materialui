@@ -1,6 +1,7 @@
 import { getSocialIcon } from "./social-helper";
 
 export const HOST = "http://localhost:1337";
+export const HOST_FE = "http://localhost:4000";
 export const THEME_DEFAULT = `theme-default`;
 export const BRANCH_NAME = `Airwork chain`;
 

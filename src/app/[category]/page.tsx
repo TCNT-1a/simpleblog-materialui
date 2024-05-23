@@ -1,10 +1,13 @@
-import next, { Metadata, ResolvingMetadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
 import { LoadMore } from "@/components/ListPost/LoadMore";
 import { BRANCH_NAME, HOST_FE, PAGE_LIMIT } from "@/config/app.config";
-import LeftBar from "../../components/leftbar/leftbar";
+import validator from "validator";
+import { NextPreviousHandle } from "@/config/paging-helper";
 
+// Use validator
+console.log(validator.isNumeric("123")); // true
 type Props = {
   params: { category: string };
   searchParams: { [key: string]: string | string[] | undefined };
@@ -49,44 +52,4 @@ export default async function PostPage({
       ></LoadMore>
     </ListPost>
   );
-}
-
-export async function NextPreviousHandle(apiPath: string, searchParams: any) {
-  const { page, limit } = searchParams;
-
-  let cal_page = parseInt(page == undefined ? 1 : page);
-  let cal_limit = parseInt(limit == undefined ? PAGE_LIMIT : limit);
-
-  const query = page ? `&page=${page}&limit=${cal_limit + 1}` : "";
-  const fullPathQuery = `${apiPath}${query}`;
-  console.log("fullPathQuery ", fullPathQuery);
-  const { data } = await getApi2(fullPathQuery);
-  const { posts } = data;
-  console.log("post ", posts.length);
-
-  const d = PagingCalculate(posts, cal_page, cal_limit);
-  let next = false;
-  let previous = false;
-  next = d.next;
-  previous = d.previous;
-  return { next, previous, page: cal_page, limit: cal_limit, posts };
-}
-
-function PagingCalculate(post_Add1: any[], page: number, limit: number) {
-  let next = false;
-  let previous = false;
-
-  if (post_Add1.length > limit) {
-    next = true;
-  }
-  if (page <= 1) {
-    previous = false;
-  } else {
-    previous = true;
-  }
-
-  return {
-    next,
-    previous,
-  };
 }

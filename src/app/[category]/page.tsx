@@ -2,12 +2,9 @@ import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
 import { LoadMore } from "@/components/ListPost/LoadMore";
-import { BRANCH_NAME, HOST_FE, PAGE_LIMIT } from "@/config/app.config";
-import validator from "validator";
+import { BRANCH_NAME, HOST_FE } from "@/config/app.config";
 import { NextPreviousHandle } from "@/config/paging-helper";
 
-// Use validator
-console.log(validator.isNumeric("123")); // true
 type Props = {
   params: { category: string };
   searchParams: { [key: string]: string | string[] | undefined };

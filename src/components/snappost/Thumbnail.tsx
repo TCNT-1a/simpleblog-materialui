@@ -15,7 +15,7 @@ export function Thumbnail({ post }: { post: Post }) {
       style={{ width: w + "px", height: h + "px" }}
     >
       <Image
-        className="rounded-5"
+        className="rounded-lg"
         alt="post image"
         width={w}
         height={h}

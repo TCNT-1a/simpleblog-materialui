@@ -28,35 +28,56 @@ export default async function PostPage({
   params: { category: string };
   searchParams: any;
 }) {
-  const { page, limit } = searchParams;
-
-  const numLimit = parseInt(limit as string) || 3;
   const apiPath = `api/blog/post?category=${params.category}`;
-  const q = page ? `&page=${page}&limit=${numLimit + 1}` : "";
-  const t = `${apiPath}${q}`;
-  console.log(t);
-  const { data } = await getApi2(t);
-  const { posts } = data;
-  let next = false;
-  let previous = false;
-  if (posts.length > numLimit) {
-    next = true;
+  const data = await NextPreviousHandle(apiPath, searchParams);
+  const { next, previous, page, limit, posts } = data;
+  if (posts.length > limit) {
+    posts.pop();
   }
-  if (page > 1) {
-    previous = true;
-  }
-  posts.pop();
-  const path = `${HOST_FE}/${params.category}`;
-  console.log(path);
+
+  const LinkLoadMore = `${HOST_FE}/${params.category}`;
   return (
     <ListPost posts={posts}>
       <LoadMore
-        path={path}
+        path={LinkLoadMore}
         page={page}
-        limit={numLimit}
+        limit={limit}
         next={next}
         previous={previous}
       ></LoadMore>
     </ListPost>
   );
+}
+
+export async function NextPreviousHandle(apiPath: string, searchParams: any) {
+  const { page, limit } = searchParams;
+  let callimit = parseInt(limit == undefined ? 3 : limit);
+  if (Number.isInteger(page)) {
+  }
+  if (Number.isInteger(limit)) {
+    console.log("limit: ", limit);
+    callimit = parseInt(limit);
+  }
+
+  const q = page ? `&page=${page}&limit=${callimit + 1}` : "";
+  const t = `${apiPath}${q}`;
+  // console.log("t: ", t);
+  const { data } = await getApi2(t);
+  const { posts } = data;
+
+  // console.log("post: ", posts);
+  let next = false;
+  let previous = false;
+  if (page == null) {
+    next = false;
+    previous = false;
+  } else {
+    if (posts.length > callimit) {
+      next = true;
+    }
+    if (page > 1) {
+      previous = true;
+    }
+  }
+  return { next, previous, page, limit: callimit, posts };
 }

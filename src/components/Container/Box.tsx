@@ -23,7 +23,7 @@ export function WhiteBox({
   return (
     <div
       className={
-        "flex flex-col bg-bg p-3 rounded-lg space-y-2 " +
+        "flex flex-col bg-bg p-[1px] rounded-lg space-y-2 shadow-md" +
         (hoverable ? " hover:bg-bg-hover" : "")
       }
     >

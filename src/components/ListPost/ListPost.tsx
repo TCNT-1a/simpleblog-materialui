@@ -7,7 +7,7 @@ export default function ListPost({
   children,
 }: {
   posts: any[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   if (posts.length == 0) return <Custom404></Custom404>;
   return (
@@ -15,7 +15,7 @@ export default function ListPost({
       {posts.map((post: any, i: number) => (
         <SnapPost key={i} post={post}></SnapPost>
       ))}
-      <div>{children}</div>
+      <div>{children ? children : ""}</div>
     </div>
   );
 }

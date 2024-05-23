@@ -6,7 +6,6 @@ import { HOST } from "./app.config";
 
 export function getApi() {
   const token = Cookies.get("token");
-  console.log(token);
   return axios.create({
     baseURL: backend_api,
     headers: {

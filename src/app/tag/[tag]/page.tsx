@@ -10,14 +10,10 @@ type Props = {
 
 export default async function TagPage({ params, searchParams }: Props) {
   const { data } = await getApi2(`api/blog/post?tag=${params.tag}`);
-
   const { posts } = data;
-
   return (
     <MainLayout>
-      <ListPost posts={posts}>
-        <LoadMore />
-      </ListPost>
+      <ListPost posts={posts}></ListPost>
     </MainLayout>
   );
 }

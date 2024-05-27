@@ -17,11 +17,11 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { data } = await getApi2(`api/blog/post/${params.post}`);
-  const { post } = data;
-  if (post == null) return { title: "404 Not Found" };
+
+  if (data == null) return { title: "404 Not Found" };
   return {
-    title: post.title,
-    description: post.metaDescription,
+    // title: post.title,
+    // description: post.metaDescription,
   };
 }
 

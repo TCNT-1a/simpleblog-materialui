@@ -14,9 +14,10 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { data } = await getApi2(`api/blog/posts?category=${params.category}`);
-
+  console.log(data);
   if (data == null) return { title: "404 Not Found" };
   return {};
+
   // return {
   //   title: BRANCH_NAME + " - " + category.name,
   //   description: BRANCH_NAME + " - " + category.metaDescription,

@@ -4,11 +4,23 @@ import ListPost from "@/components/ListPost/ListPost";
 import { LoadMore } from "@/components/ListPost/LoadMore";
 import { PagingCalculate } from "@/config/paging-helper";
 import { HOST_FE, PAGE_LIMIT } from "@/config/app.config";
+import { generateHeadingTag } from "@/config/metadata.helper";
+import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
   params: { tag: string };
   searchParams: any;
 };
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { data } = await getApi2(`api/blog/tag/${params.tag}`);
+  if (data == null) return { title: "404 Not Found" };
+  const { heading_tag } = data;
+  return generateHeadingTag(heading_tag);
+}
 
 export default async function TagPage({ params, searchParams }: Props) {
   const { page, limit } = searchParams;

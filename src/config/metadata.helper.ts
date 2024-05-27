@@ -19,6 +19,7 @@ export type HeadingTag = {
 };
 
 export function generateHeadingTag(metadata: HeadingTag) {
+  console.log("metadata", metadata);
   return {
     title: BRANCH_NAME + " - " + metadata.title,
   };

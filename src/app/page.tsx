@@ -8,6 +8,7 @@ import { PagingCalculate } from "@/config/paging-helper";
 
 export async function generateMetadata() {
   // const pageInfor = await getPageInfo();
+  //http://localhost:1337/api/blog/category/huong-dan-co-ban
   let headingTag: HeadingTag = {
     title: "",
   };

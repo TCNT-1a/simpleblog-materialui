@@ -14,7 +14,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { data } = await getApi2(`api/blog/posts?category=${params.category}`);
+  const { data } = await getApi2(`api/blog/category/${params.category}`);
   if (data == null) return { title: "404 Not Found" };
   const { heading_tag } = data;
   return generateHeadingTag(heading_tag);

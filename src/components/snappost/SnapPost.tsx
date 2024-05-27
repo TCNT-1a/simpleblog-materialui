@@ -39,5 +39,7 @@ function TitlePost({ post }: { post: Post }) {
 }
 
 function Description({ post }: { post: Post }) {
-  return <summary className="p-5">{post.metaDescription}</summary>;
+  const { heading_tag } = post;
+  const { meta_description } = heading_tag;
+  return <summary className="p-5 list-none">{meta_description}</summary>;
 }

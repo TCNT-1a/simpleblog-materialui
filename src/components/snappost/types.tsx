@@ -2,11 +2,11 @@ export type Post = {
   id: number;
   title: string;
   content: string;
-  viewCount: number;
+  postViews: number;
   tags: { id: number; name: string; slug: string }[];
   publicDate: string;
   slug: string;
   featureImage?: any;
-  metaDescription: string;
+  heading_tag: any;
   category: { slug: string };
 };

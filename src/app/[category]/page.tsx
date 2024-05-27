@@ -16,6 +16,8 @@ export async function generateMetadata(
   const { data } = await getApi2(`api/blog/posts?category=${params.category}`);
   console.log(data);
   if (data == null) return { title: "404 Not Found" };
+  const { heading_tag } = data;
+
   return {};
 
   // return {

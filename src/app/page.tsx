@@ -1,14 +1,18 @@
 import { getApi2, getPageInfo } from "@/config/api-helper";
 import MainLayout from "./MainLayout";
 import ListPost from "@/components/ListPost/ListPost";
-import { generateMetadata_Object } from "@/config/metadata.helper";
+import { HeadingTag, generateHeadingTag } from "@/config/metadata.helper";
 import { HOST_FE, PAGE_LIMIT } from "@/config/app.config";
 import { LoadMore } from "@/components/ListPost/LoadMore";
 import { PagingCalculate } from "@/config/paging-helper";
 
 export async function generateMetadata() {
-  const pageInfor = await getPageInfo();
-  return generateMetadata_Object(pageInfor.branchName, false);
+  // const pageInfor = await getPageInfo();
+  let headingTag: HeadingTag = {
+    title: "",
+  };
+
+  return generateHeadingTag(headingTag);
 }
 
 export default async function Home({ searchParams }: { searchParams: any }) {

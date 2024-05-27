@@ -3,7 +3,7 @@ export type Post = {
   title: string;
   content: string;
   viewCount: number;
-  tags: { id: number; tagName: string; slug: string }[];
+  tags: { id: number; name: string; slug: string }[];
   publicDate: string;
   slug: string;
   featureImage?: any;

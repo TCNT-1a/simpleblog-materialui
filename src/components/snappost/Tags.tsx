@@ -7,7 +7,7 @@ export function Tags({ post }: { post: Post }) {
     <div className="flex flex-row">
       {tags.map((tag, i) => (
         <Badge color="red" key={i} className="mr-2 w-fit h-fit">
-          {tag.tagName}
+          {tag.name}
         </Badge>
       ))}
     </div>

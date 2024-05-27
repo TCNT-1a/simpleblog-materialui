@@ -24,6 +24,7 @@ export default async function TagPage({ params, searchParams }: Props) {
   if (data.length > p_limit) {
     data.pop();
   }
+
   const LinkLoadMore = `${HOST_FE}/tag/${params.tag}`;
   return (
     <MainLayout>

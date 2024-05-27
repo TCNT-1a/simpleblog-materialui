@@ -19,7 +19,7 @@ export default async function Home({ searchParams }: { searchParams: any }) {
 
   const apiPath = `api/blog/posts?` + `page=${p_page}&limit=${p_limit}`;
   const { data } = await getApi2(apiPath);
-  console.log("data ", data);
+
   const d = PagingCalculate(data, p_page, p_limit);
   if (data.length > p_limit) {
     data.pop();

@@ -2,7 +2,7 @@ import { getApi2, getPageInfo } from "@/config/api-helper";
 import MainLayout from "./MainLayout";
 import ListPost from "@/components/ListPost/ListPost";
 import { generateMetadata_Object } from "@/config/metadata.helper";
-import { HOST_FE } from "@/config/app.config";
+import { HOST_FE, PAGE_LIMIT } from "@/config/app.config";
 import { LoadMore } from "@/components/ListPost/LoadMore";
 import { PagingCalculate } from "@/config/paging-helper";
 
@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: { searchParams: any }) {
   const { page, limit } = searchParams;
 
   const p_page = page ? page : 1;
-  const p_limit = limit ? limit : 2;
+  const p_limit = limit ? limit : PAGE_LIMIT;
 
   const apiPath = `api/blog/posts?` + `page=${p_page}&limit=${p_limit}`;
   const { data } = await getApi2(apiPath);

@@ -2,7 +2,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
 import { LoadMore } from "@/components/ListPost/LoadMore";
-import { BRANCH_NAME, HOST_FE } from "@/config/app.config";
+import { BRANCH_NAME, HOST_FE, PAGE_LIMIT } from "@/config/app.config";
 import { PagingCalculate } from "@/config/paging-helper";
 
 type Props = {
@@ -33,7 +33,7 @@ export default async function PostPage({
   const { page, limit } = searchParams;
 
   const p_page = page ? page : 1;
-  const p_limit = limit ? limit : 2;
+  const p_limit = limit ? limit : PAGE_LIMIT;
 
   const apiPath =
     `api/blog/posts?category=${params.category}&` +

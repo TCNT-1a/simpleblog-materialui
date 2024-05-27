@@ -4,6 +4,7 @@ import { getApi2 } from "@/config/api-helper";
 import { LoadMore } from "@/components/ListPost/LoadMore";
 import { BRANCH_NAME, HOST_FE, PAGE_LIMIT } from "@/config/app.config";
 import { PagingCalculate } from "@/config/paging-helper";
+import { generateHeadingTag } from "@/config/metadata.helper";
 
 type Props = {
   params: { category: string };
@@ -14,16 +15,9 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { data } = await getApi2(`api/blog/posts?category=${params.category}`);
-  console.log(data);
   if (data == null) return { title: "404 Not Found" };
   const { heading_tag } = data;
-
-  return {};
-
-  // return {
-  //   title: BRANCH_NAME + " - " + category.name,
-  //   description: BRANCH_NAME + " - " + category.metaDescription,
-  // };
+  return generateHeadingTag(heading_tag);
 }
 
 export default async function PostPage({

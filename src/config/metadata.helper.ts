@@ -1,13 +1,6 @@
+import { Metadata } from "next";
 import { BRANCH_NAME } from "./app.config";
 
-// export async function generateMetadata_Object(title: string, notFound = false) {
-//   if (notFound == true) return { title: "404 Not Found" };
-//   return {
-//     title: BRANCH_NAME + " - " + title,
-//     // description: BRANCH_NAME + " - ",
-//     // metadata,
-//   };
-// }
 export type HeadingTag = {
   noindex?: string;
   prev?: string;
@@ -18,9 +11,20 @@ export type HeadingTag = {
   title?: string;
 };
 
-export function generateHeadingTag(metadata: HeadingTag) {
+export function generateHeadingTag(metadata: HeadingTag): Metadata {
   console.log("metadata", metadata);
+  const appLinks = [
+    {
+      rel: "canonical",
+      href: metadata.canonical,
+    },
+  ];
   return {
     title: BRANCH_NAME + " - " + metadata.title,
+    robots: metadata.noindex ? "noindex" : "",
+    description: metadata.meta_description,
+    alternates: {
+      canonical: metadata.canonical,
+    },
   };
 }

@@ -25,14 +25,14 @@ export async function getPageInfo(): Promise<PageInfor> {
   const { data } = await getApi2(`api/page-info`);
   if (data) {
     const { attributes } = data;
-    const { branchName, metaHomePage, contacts } = attributes;
-    return { branchName, metaHomePage, contacts };
+    const { branchName, contacts } = attributes;
+    return { branchName, contacts };
   } else {
-    return { branchName: "", metaHomePage: "", contacts: "" };
+    return { branchName: "", contacts: "" };
   }
 }
 type PageInfor = {
   branchName: NonNullable<string>;
-  metaHomePage: NonNullable<string>;
+
   contacts: NonNullable<string>;
 };

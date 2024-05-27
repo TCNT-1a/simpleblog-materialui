@@ -4,34 +4,38 @@ import ListPost from "@/components/ListPost/ListPost";
 import { generateMetadata_Object } from "@/config/metadata.helper";
 import { HOST_FE } from "@/config/app.config";
 import { LoadMore } from "@/components/ListPost/LoadMore";
+import { PagingCalculate } from "@/config/paging-helper";
 
 export async function generateMetadata() {
   const pageInfor = await getPageInfo();
   return generateMetadata_Object(pageInfor.branchName, false);
 }
 
-export default async function Home() {
-  const apiPath = `api/blog/posts`;
-  const { data } = await getApi2(apiPath);
+export default async function Home({ searchParams }: { searchParams: any }) {
+  const { page, limit } = searchParams;
 
-  const { next, previous, page, limit, posts } = data;
-  if (data.length > limit) {
-    posts.pop();
+  const p_page = page ? page : 1;
+  const p_limit = limit ? limit : 2;
+
+  const apiPath = `api/blog/posts?` + `page=${p_page}&limit=${p_limit}`;
+  const { data } = await getApi2(apiPath);
+  console.log("data ", data);
+  const d = PagingCalculate(data, p_page, p_limit);
+  if (data.length > p_limit) {
+    data.pop();
   }
 
   const LinkLoadMore = `${HOST_FE}/`;
-
-  console.log(data);
   return (
     <MainLayout>
       <h2>Bài viết mới nhất</h2>
       <ListPost posts={data}>
         <LoadMore
           path={LinkLoadMore}
-          page={page}
-          limit={limit}
-          next={next}
-          previous={previous}
+          page={p_page}
+          limit={p_limit}
+          next={d.next}
+          previous={d.previous}
         ></LoadMore>
       </ListPost>
     </MainLayout>

@@ -27,19 +27,18 @@ export async function generateMetadata(
 
 export default async function PostPageDetail({ params, searchParams }: Props) {
   const { data } = await getApi2(`api/blog/post/${params.post}`);
-  const { post } = data;
 
-  if (post == null) return <Custom404></Custom404>;
+  if (data == null) return <Custom404></Custom404>;
   else
     return (
       <>
-        <h1>{post.title}</h1>
+        <h1>{data.title}</h1>
         <div className="flex flex-row items-center gap-2">
-          <PostDate post={post}></PostDate>
-          <NumberOfView viewNumber={post.viewCount}></NumberOfView>
-          <AvatarUser author={post.author}></AvatarUser>
+          <PostDate post={data}></PostDate>
+          <NumberOfView viewNumber={data.postViews}></NumberOfView>
+          <AvatarUser author={data.author}></AvatarUser>
         </div>
-        {post.content ? <BlocksRenderer content={post.content} /> : null}
+        {data.content ? <BlocksRenderer content={data.content} /> : null}
       </>
     );
 }
@@ -49,7 +48,7 @@ function AvatarUser({ author }: { author: any }) {
   const urldefault =
     "https://flowbite.com/docs/images/people/profile-picture-1.jpg";
   if (!author) url = urldefault;
-  else url = author.avatar.url ? author.avatar.url : urldefault;
+  else url = author.avatar ? author.avatar.url : urldefault;
   const path = HOST + url;
   return (
     <div className="flex flex-wrap gap-2 items-center">

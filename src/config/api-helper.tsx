@@ -33,6 +33,5 @@ export async function getPageInfo(): Promise<PageInfor> {
 }
 type PageInfor = {
   branchName: NonNullable<string>;
-
   contacts: NonNullable<string>;
 };

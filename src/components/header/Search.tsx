@@ -26,9 +26,13 @@ export function SearchBox({}) {
           }}
         />
         <div className="absolute">
-          <ListGroup className="w-48">
+          <ListGroup className="w-fit">
             {posts.map((post: any, i) => (
-              <Link key={i} href={`/${post.category.slug}/${post.slug}`}>
+              <Link
+                key={i}
+                href={`/${post.category.slug}/${post.slug}`}
+                onClick={() => setPosts([])}
+              >
                 <ListGroup.Item className="bg-opacity-70">
                   {post.title}
                 </ListGroup.Item>

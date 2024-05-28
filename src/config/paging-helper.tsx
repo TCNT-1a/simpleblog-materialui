@@ -19,3 +19,22 @@ export function PagingCalculate(
     previous,
   };
 }
+export function CalculatePrevNextLink(
+  path: string,
+  page: number,
+  next: boolean,
+  previous: boolean,
+  limit: number
+) {
+  const nextPage = parseInt((page + "") as string) + 1;
+  const previousPage = page - 1;
+  const nextPath = next ? path + `?page=${nextPage}&limit=${limit}` : "";
+  const previousPath = previous
+    ? path + `?page=${previousPage}&limit=${limit}`
+    : "";
+
+  return {
+    nextPath,
+    previousPath,
+  };
+}

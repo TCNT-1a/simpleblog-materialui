@@ -13,16 +13,18 @@ export type HeadingTag = {
 
 export function generateHeadingTag(metadata: HeadingTag): Metadata {
   console.log("metadata", metadata);
-  const appLinks = [
-    {
-      rel: "canonical",
-      href: metadata.canonical,
-    },
-  ];
+  const metaNext = metadata.next ? { rel: "next", url: metadata.next } : null;
+  const metaPrev = metadata.prev ? { rel: "prev", url: metadata.prev } : null;
+  const other = [metaNext, metaPrev].filter((e) => e !== null);
+
   return {
     title: BRANCH_NAME + " - " + metadata.title,
     robots: metadata.noindex ? "noindex" : "",
     description: metadata.meta_description,
+    icons: {
+      icon: "/favicon.ico",
+      // other: other,
+    },
     alternates: {
       canonical: metadata.canonical,
     },

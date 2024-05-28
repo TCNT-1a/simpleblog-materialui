@@ -1,3 +1,4 @@
+import { CalculatePrevNextLink } from "@/config/paging-helper";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -16,10 +17,14 @@ export function LoadMore({
   previous: boolean;
 }) {
   const classes = "bg-primary text-white hover:text-gray-200 rounded-lg p-1";
-  const nextPage = parseInt((page + "") as string) + 1;
-  const previousPage = page - 1;
-  const nextPath = path + `?page=${nextPage}&limit=${limit}`;
-  const previousPath = path + `?page=${previousPage}&limit=${limit}`;
+  const { nextPath, previousPath } = CalculatePrevNextLink(
+    path,
+    page,
+    next,
+    previous,
+    limit
+  );
+
   return (
     <div className="flex flex-row flex-wrap justify-center space-x-2">
       {previous ? (

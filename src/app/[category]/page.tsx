@@ -2,9 +2,10 @@ import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
 import { LoadMore } from "@/components/ListPost/LoadMore";
-import { BRANCH_NAME, HOST_FE, PAGE_LIMIT } from "@/config/app.config";
+import { HOST_FE, PAGE_LIMIT } from "@/config/app.config";
 import { PagingCalculate } from "@/config/paging-helper";
 import { generateHeadingTag } from "@/config/metadata.helper";
+import Head from "next/head";
 
 type Props = {
   params: { category: string };
@@ -45,14 +46,21 @@ export default async function PostPage({
 
   const LinkLoadMore = `${HOST_FE}/${params.category}`;
   return (
-    <ListPost posts={data}>
-      <LoadMore
-        path={LinkLoadMore}
-        page={p_page}
-        limit={p_limit}
-        next={d.next}
-        previous={d.previous}
-      ></LoadMore>
-    </ListPost>
+    <>
+      <Head>
+        <link rel="icon" href="/favicon1.ico" />
+        <title>SimpleBlog | {params.category}</title>
+        <meta name="description" content="SimpleBlog" />
+      </Head>
+      <ListPost posts={data}>
+        <LoadMore
+          path={LinkLoadMore}
+          page={p_page}
+          limit={p_limit}
+          next={d.next}
+          previous={d.previous}
+        ></LoadMore>
+      </ListPost>
+    </>
   );
 }

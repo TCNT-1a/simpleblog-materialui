@@ -1,3 +1,8 @@
+import { LoadMore } from "@/components/ListPost/LoadMore";
+import { PAGE_LIMIT } from "./app.config";
+import { getApi2 } from "./api-helper";
+import { cache } from "react";
+
 export function PagingCalculate(
   postInPageAnd1: any[],
   page: number,
@@ -38,3 +43,32 @@ export function CalculatePrevNextLink(
     previousPath,
   };
 }
+
+export const getPosts = cache(
+  async (searchParams: any, path: string, linkLM: string) => {
+    const { page, limit } = searchParams;
+    const p_page = page ? page : 1;
+    const p_limit = limit ? limit : PAGE_LIMIT;
+
+    const apiPath = `${path}&` + `page=${p_page}&limit=${p_limit}`;
+    const { data } = await getApi2(apiPath);
+
+    const d = PagingCalculate(data, p_page, p_limit);
+
+    if (data.length > p_limit) {
+      data.pop();
+    }
+
+    const LinkLoadMore = (
+      <LoadMore
+        path={linkLM}
+        page={p_page}
+        limit={p_limit}
+        next={d.next}
+        previous={d.previous}
+      ></LoadMore>
+    );
+
+    return { data, LinkLoadMore, next: d.next, previous: d.previous };
+  }
+);

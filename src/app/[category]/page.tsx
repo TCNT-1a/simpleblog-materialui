@@ -1,21 +1,27 @@
 import { Metadata, ResolvingMetadata } from "next";
 import ListPost from "../../components/ListPost/ListPost";
 import { getApi2 } from "@/config/api-helper";
-import { LoadMore } from "@/components/ListPost/LoadMore";
-import { HOST_FE, PAGE_LIMIT } from "@/config/app.config";
-import { PagingCalculate } from "@/config/paging-helper";
+
+import { HOST_FE } from "@/config/app.config";
+import { getPosts } from "@/config/paging-helper";
 import { generateHeadingTag } from "@/config/metadata.helper";
-import Head from "next/head";
+import { cache } from "react";
 
 type Props = {
   params: { category: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+const getHeadingTag = cache(async (category: string) => {
+  const { data } = await getApi2(`api/blog/category/${category}`);
+  return data;
+});
+
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { data } = await getApi2(`api/blog/category/${params.category}`);
+  const data = await getHeadingTag(params.category);
   if (data == null) return { title: "404 Not Found" };
   const { heading_tag } = data;
   return generateHeadingTag(heading_tag);
@@ -28,39 +34,13 @@ export default async function PostPage({
   params: { category: string };
   searchParams: any;
 }) {
-  const { page, limit } = searchParams;
+  const linkLM = `${HOST_FE}/${params.category}`;
+  const apiPath = `api/blog/posts?category=${params.category}`;
+  const { data, LinkLoadMore } = await getPosts(searchParams, apiPath, linkLM);
 
-  const p_page = page ? page : 1;
-  const p_limit = limit ? limit : PAGE_LIMIT;
-
-  const apiPath =
-    `api/blog/posts?category=${params.category}&` +
-    `page=${p_page}&limit=${p_limit}`;
-  const { data } = await getApi2(apiPath);
-
-  const d = PagingCalculate(data, p_page, p_limit);
-
-  if (data.length > p_limit) {
-    data.pop();
-  }
-
-  const LinkLoadMore = `${HOST_FE}/${params.category}`;
   return (
     <>
-      <Head>
-        <link rel="icon" href="/favicon1.ico" />
-        <title>SimpleBlog | {params.category}</title>
-        <meta name="description" content="SimpleBlog" />
-      </Head>
-      <ListPost posts={data}>
-        <LoadMore
-          path={LinkLoadMore}
-          page={p_page}
-          limit={p_limit}
-          next={d.next}
-          previous={d.previous}
-        ></LoadMore>
-      </ListPost>
+      <ListPost posts={data}>{LinkLoadMore}</ListPost>
     </>
   );
 }

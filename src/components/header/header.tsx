@@ -1,26 +1,16 @@
-"use client";
-import { Grid, useMediaQuery, useTheme } from "@mui/material";
-import NavBar from "./navbar";
+import { TextInput } from "flowbite-react";
 import Brand from "./brand";
-
-export default function Header() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+import { BRANCH_NAME } from "@/config/app.config";
+import { getPageInfo } from "@/config/api-helper";
+export default async function Header() {
+  const pageInfo = await getPageInfo();
 
   return (
-    <header>
-      <Grid container>
-        <Grid item xs={12}>
-          <Grid container>
-            <Grid item xs={isMobile ? 12 : 3}>
-              <Brand></Brand>
-            </Grid>
-            <Grid item xs={isMobile ? 12 : 7}>
-              <NavBar></NavBar>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </header>
+    <div className="bg-primary flex justify-between items-center shadow-md">
+      <Brand branchName={pageInfo.branchName || BRANCH_NAME}></Brand>
+      <div className="p-3">
+        <TextInput type="text" placeholder="search" />
+      </div>
+    </div>
   );
 }

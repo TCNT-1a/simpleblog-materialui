@@ -6,6 +6,7 @@ import { HOST_FE } from "@/config/app.config";
 import { getPosts } from "@/config/paging-helper";
 import { generateHeadingTag } from "@/config/metadata.helper";
 import { cache } from "react";
+import { HeadingTag404 } from "../404/404";
 
 type Props = {
   params: { category: string };
@@ -21,10 +22,18 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const data = await getHeadingTag(params.category);
-  if (data == null) return { title: "404 Not Found" };
-  const { heading_tag } = data;
-  return generateHeadingTag(heading_tag);
+  const linkLM = `${HOST_FE}/${params.category}`;
+  const apiPath = `api/blog/posts?category=${params.category}`;
+  const { nextPath, previousPath } = await getPosts(
+    searchParams,
+    apiPath,
+    linkLM
+  );
+
+  const cat = await getHeadingTag(params.category);
+  if (cat == null) return HeadingTag404();
+  const { heading_tag } = cat;
+  return generateHeadingTag(heading_tag, nextPath, previousPath);
 }
 
 export default async function PostPage({

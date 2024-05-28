@@ -5,8 +5,8 @@ export function Thumbnail({ post }: { post: Post }) {
   let path: string;
   const w = 300;
   const h = 188;
-  if (post.featureImage) {
-    const { url } = post.featureImage;
+  if (post.post_thumbnail) {
+    const { url } = post.post_thumbnail;
     path = `${HOST}${url}`;
   } else path = getImage(post.id.toString(), w, h);
   return (

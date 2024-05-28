@@ -3,26 +3,33 @@ import { NumberOfView } from "@/components/NumberOfView";
 import { BlocksRenderer } from "@strapi/blocks-react-renderer";
 
 import type { Metadata, ResolvingMetadata } from "next";
-import Custom404 from "../../404/404";
+import Custom404, { HeadingTag404 } from "../../404/404";
 import PostDate from "@/components/snappost/PostDate";
 import { Avatar } from "flowbite-react";
 import { HOST } from "@/config/app.config";
+import { cache } from "react";
+import { generateHeadingTag } from "@/config/metadata.helper";
 type Props = {
   params: { post: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+// const getHeadingTag = cache(async (category: string) => {
+//   const { data } = await getApi2(`api/blog/category/${category}`);
+//   return data;
+// });
+// const apiPath = "api/blog/category/";
+const getPost = cache(async (slug: string) => {
+  return await getApi2(`api/blog/post/${slug}`);
+});
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { data } = await getApi2(`api/blog/post/${params.post}`);
-
-  if (data == null) return { title: "404 Not Found" };
-  return {
-    // title: post.title,
-    // description: post.metaDescription,
-  };
+  const { data } = await getPost(params.post);
+  if (data == null) return HeadingTag404();
+  const { heading_tag } = data;
+  return generateHeadingTag(heading_tag, "", "");
 }
 
 export default async function PostPageDetail({ params, searchParams }: Props) {

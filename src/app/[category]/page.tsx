@@ -6,6 +6,7 @@ import { HOST_FE } from "@/config/app.config";
 import { getPosts } from "@/config/paging-helper";
 import { generateHeadingTag } from "@/config/metadata.helper";
 import { cache } from "react";
+import { HeadingTag404 } from "../404/404";
 
 type Props = {
   params: { category: string };
@@ -30,7 +31,7 @@ export async function generateMetadata(
   );
 
   const cat = await getHeadingTag(params.category);
-  if (cat == null) return { title: "404 Not Found" };
+  if (cat == null) return HeadingTag404();
   const { heading_tag } = cat;
   return generateHeadingTag(heading_tag, nextPath, previousPath);
 }

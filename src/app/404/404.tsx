@@ -11,3 +11,6 @@ export default function Custom404() {
     </div>
   );
 }
+export function HeadingTag404() {
+  return { title: "404 Not Found" };
+}

@@ -59,6 +59,14 @@ export const getPosts = cache(
       data.pop();
     }
 
+    const { nextPath, previousPath } = CalculatePrevNextLink(
+      linkLM,
+      p_page,
+      d.next,
+      d.previous,
+      p_limit
+    );
+
     const LinkLoadMore = (
       <LoadMore
         path={linkLM}
@@ -69,6 +77,6 @@ export const getPosts = cache(
       ></LoadMore>
     );
 
-    return { data, LinkLoadMore, next: d.next, previous: d.previous };
+    return { data, LinkLoadMore, nextPath, previousPath };
   }
 );

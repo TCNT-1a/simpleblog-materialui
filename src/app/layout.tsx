@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { AppWrapper } from "./context/AppWrapper";
-import { getApi2 } from "@/api-helper";
+import { THEME_DEFAULT } from "@/config/app.config";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,13 +15,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data } = await getApi2("api/blog/category");
-  const categories = data.categories;
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <AppWrapper categories={categories}>{children}</AppWrapper>
-      </body>
+      <body className={THEME_DEFAULT + " bg-bg-primary"}>{children}</body>
     </html>
   );
 }

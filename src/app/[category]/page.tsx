@@ -1,19 +1,46 @@
-import { Metadata } from "next";
-import ListPost from "./ListPost";
-import { layout_styles } from "./style";
-import { getApi2 } from "@/api-helper";
+import { Metadata, ResolvingMetadata } from "next";
+import ListPost from "../../components/ListPost/ListPost";
+import { getApi2 } from "@/config/api-helper";
+
+import { HOST_FE } from "@/config/app.config";
+import { getPosts } from "@/config/paging-helper";
+import { generateHeadingTag } from "@/config/metadata.helper";
+import { cache } from "react";
+
+type Props = {
+  params: { category: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+const getHeadingTag = cache(async (category: string) => {
+  const { data } = await getApi2(`api/blog/category/${category}`);
+  return data;
+});
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const data = await getHeadingTag(params.category);
+  if (data == null) return { title: "404 Not Found" };
+  const { heading_tag } = data;
+  return generateHeadingTag(heading_tag);
+}
 
 export default async function PostPage({
   params,
+  searchParams,
 }: {
   params: { category: string };
+  searchParams: any;
 }) {
-  const { data } = await getApi2(`api/blog/post?category=${params.category}`);
-  const { posts } = data;
+  const linkLM = `${HOST_FE}/${params.category}`;
+  const apiPath = `api/blog/posts?category=${params.category}`;
+  const { data, LinkLoadMore } = await getPosts(searchParams, apiPath, linkLM);
 
   return (
-    <div className="w">
-      <ListPost posts={posts}></ListPost>
-    </div>
+    <>
+      <ListPost posts={data}>{LinkLoadMore}</ListPost>
+    </>
   );
 }

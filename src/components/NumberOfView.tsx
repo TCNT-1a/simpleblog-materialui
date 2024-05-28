@@ -1,24 +1,12 @@
-import { Grid } from "@mui/material";
 import React from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Typography } from "@mui/material";
 export function NumberOfView({ viewNumber }: { viewNumber: number }) {
   return (
-    <Grid
-      container
-      style={{
-        display: "flex",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-      spacing={1}
-    >
-      <Grid item>
-        <VisibilityIcon />
-      </Grid>
-      <Grid item>
-        <Typography variant="body1">{viewNumber}</Typography>
-      </Grid>
-    </Grid>
+    <div className="flex flex-row h-6">
+      <small>
+        <em className="bg-primary p-1 rounded-lg text-third">
+          {viewNumber} Lượt xem
+        </em>
+      </small>
+    </div>
   );
 }

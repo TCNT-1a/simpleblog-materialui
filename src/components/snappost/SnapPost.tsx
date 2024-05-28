@@ -1,122 +1,45 @@
-import { StyledCard } from "@/components/StyleCard";
-import {
-  Box,
-  Button,
-  Card,
-  Chip,
-  Grid,
-  Typography,
-  useTheme,
-} from "@mui/material";
 import Link from "next/link";
-import { DateRange } from "@mui/icons-material";
-import { StyleLink } from "@/components/StyleLink";
+
 import { Tags } from "./Tags";
 import { Thumbnail } from "./Thumbnail";
 import { Post } from "./types";
+import { Button } from "flowbite-react";
+import PostDate from "./PostDate";
+import SnapPostMeta from "./SnapPostMeta";
+import { WhiteBox } from "../Container/Box";
+
 export function SnapPost({ post }: { post: Post }) {
   return (
-    <Grid sx={{ margin: 5 }}>
-      <StyledCard>
-        <Grid
-          container
-          spacing={2}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: 5,
-          }}
-        >
-          <Grid item xs={4}>
-            {Thumbnail(post)}
-          </Grid>
-          <Grid item xs={8}>
-            <Grid container>
-              <TitlePost post={post} />
-              <Description post={post} />
-            </Grid>
-          </Grid>
-        </Grid>
-      </StyledCard>
-      <SnapPostFooter post={post} />
-    </Grid>
+    <WhiteBox>
+      <div className={"post-snap w-12/12 bg-bg-primary "}>
+        <div className="flex flex-col sm:flex-row bg-bg-secondary p-1">
+          <div className="w-12/12 sm:w-50">
+            <Thumbnail post={post} />
+          </div>
+          <div className="flex flex-col  w-12/12 sm:w-8/12">
+            <TitlePost post={post} />
+            <Description post={post} />
+          </div>
+        </div>
+        <SnapPostMeta post={post} />
+      </div>
+    </WhiteBox>
   );
 }
 
 function TitlePost({ post }: { post: Post }) {
   return (
-    <Grid item>
-      <StyleLink
-        href={`/${post.category.slug}/${post.slug}`}
-        passHref
-        style={{ textDecoration: "none" }}
-      >
-        <Typography variant="h3">
-          <span># </span>
-          {post.title}
-        </Typography>
-      </StyleLink>
-    </Grid>
-  );
-}
-export function PostDate({ post }: { post: Post }) {
-  return post.publicDate ? (
-    <Box
-      style={{
-        display: "flex",
-        alignItems: "center",
-        textAlign: "center",
-        textDecoration: "italic",
-      }}
-    >
-      <DateRange />
-      <small>
-        <em>{post.publicDate}</em>
-      </small>
-    </Box>
-  ) : null;
-}
-
-function Description({ post }: { post: Post }) {
-  return (
-    <Grid item xs={12} style={{}}>
-      <p
-        style={{
-          fontSize: 14,
-          lineHeight: 1.6,
-          display: "-webkit-box",
-          WebkitBoxOrient: "vertical",
-          WebkitLineClamp: 8,
-          overflow: "hidden",
-          width: 240,
-        }}
-      >
-        {post.metaDescription}
-      </p>
-    </Grid>
-  );
-}
-function SnapPostFooter({ post }: { post: Post }) {
-  return (
-    <Grid container spacing={2} sx={{ marginTop: "2px" }}>
-      <Grid item>
-        <Tags post={post} />
-      </Grid>
-      <Grid item>
-        <PostDate post={post} />
-      </Grid>
-    </Grid>
-  );
-}
-function ButtonDetail({ post }: { post: Post }) {
-  return (
-    <Link
-      href={`/${post.category.slug}/${post.slug}`}
-      style={{ textDecoration: "none" }}
-    >
-      <Button variant="contained">Xem tiếp</Button>
+    <Link className="pt-5 pl-5" href={`/${post.category.slug}/${post.slug}`}>
+      <h3>
+        <span># </span>
+        {post.title}
+      </h3>
     </Link>
   );
 }
-//
-//Nồi cơm điện là thiết bị không thể thiếu trong mỗi gia đình. Hãy xem ngay bài viết này để biết cách sử dụng nồi cơm điện sao cho bền và tiết kiệm điện nhé!
+
+function Description({ post }: { post: Post }) {
+  const { heading_tag } = post;
+  const { meta_description } = heading_tag;
+  return <summary className="p-5 list-none">{meta_description}</summary>;
+}

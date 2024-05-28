@@ -1,23 +1,15 @@
-import { Chip, Grid } from "@mui/material";
 import { Post } from "./types";
-
+import { Badge } from "flowbite-react";
 export function Tags({ post }: { post: Post }) {
   const tags = post.tags;
+
   return (
-    <Grid
-      container
-      spacing={2}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      {tags.map((tag) => (
-        <Grid item key={tag.id}>
-          <Chip label={tag.tagName} />
-        </Grid>
+    <div className="flex flex-row">
+      {tags.map((tag, i) => (
+        <Badge color="red" key={i} className="mr-2 w-fit h-fit">
+          {tag.name}
+        </Badge>
       ))}
-    </Grid>
+    </div>
   );
 }

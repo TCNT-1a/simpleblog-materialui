@@ -1,13 +1,19 @@
 // api.js
 import axios from "axios";
 import Cookies from "js-cookie";
-import { backend_api } from "../../api.config";
+
 import { HOST } from "./app.config";
 
 export function getApi() {
+  return axios.create({
+    baseURL: HOST,
+  });
+}
+
+export function getApiAuth() {
   const token = Cookies.get("token");
   return axios.create({
-    baseURL: backend_api,
+    baseURL: HOST,
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -13,11 +13,7 @@ export async function generateMetadata({
   params: any;
   searchParams: any;
 }) {
-  // const pageInfor = await getPageInfo();
-  //http://localhost:1337/api/blog/category/huong-dan-co-ban
-  let headingTag: HeadingTag = {
-    title: "",
-  };
+  const { data } = await getApi2("api/blog/heading-tag?key=home");
   const linkLM = `${HOST_FE}/`;
   const apiPath = `api/blog/posts?`;
   const { nextPath, previousPath } = await getPosts(
@@ -25,7 +21,7 @@ export async function generateMetadata({
     apiPath,
     linkLM
   );
-  return generateHeadingTag(headingTag, nextPath, previousPath);
+  return generateHeadingTag(data, nextPath, previousPath);
 }
 
 export default async function Home({ searchParams }: { searchParams: any }) {

@@ -4,8 +4,6 @@ import { IconDescriptor } from "next/dist/lib/metadata/types/metadata-types";
 
 export type HeadingTag = {
   noindex?: string;
-  prev?: string;
-  next?: string;
   canonical?: string;
   meta_description?: string;
   key?: string;

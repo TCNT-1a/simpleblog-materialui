@@ -2,11 +2,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import { HOST } from "./app.config";
+import { HOST, HOST_FE } from "./app.config";
 
 export function getApi() {
   return axios.create({
-    baseURL: HOST,
+    baseURL: HOST_FE,
   });
 }
 
